@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://divi:divi@db:5432/divi_db
+      - SECRET_KEY=dev-secret-key
+      - ADMIN_TOKEN=admin123
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: divi
+      POSTGRES_PASSWORD: divi
+      POSTGRES_DB: divi_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
