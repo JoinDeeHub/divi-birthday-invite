@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-<title>DIVI S Kumar – 1st Birthday Invitation</title>
+<title>DIVI S KUMAR – 1st Birthday Invitation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -12,14 +12,14 @@
 html, body { min-height: 100%; }
 body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: hidden; }
 
-/* ── BALLOON CANVAS (always fixed behind everything) ── */
+/* ── BALLOON CANVAS ── */
 #balloon-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 
 .balloon { position: absolute; bottom: -160px; display: flex; flex-direction: column; align-items: center; animation: riseUp var(--dur) ease-in-out infinite var(--delay); will-change: transform; }
 @keyframes riseUp {
-  0%   { transform: translateY(0)     translateX(0px)           rotate(0deg);        opacity: 0;    }
+  0%   { transform: translateY(0)      translateX(0px)          rotate(0deg);        opacity: 0;    }
   6%   {                                                                              opacity: 0.9;  }
-  50%  { transform: translateY(-55vh) translateX(var(--sway))   rotate(var(--lean)); opacity: 0.75; }
+  50%  { transform: translateY(-55vh)  translateX(var(--sway))  rotate(var(--lean)); opacity: 0.75; }
   94%  {                                                                              opacity: 0.3;  }
   100% { transform: translateY(-115vh) translateX(0px)          rotate(0deg);        opacity: 0;    }
 }
@@ -29,87 +29,56 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .b-string{ width:1px; height:50px; background:linear-gradient(to bottom,rgba(180,140,100,0.45),rgba(180,140,100,0)); margin-top:1px; }
 
 .shimmer-dot { position:absolute; border-radius:50%; background:radial-gradient(circle,rgba(232,201,122,0.7) 0%,transparent 70%); pointer-events:none; animation:shimmerFade var(--sd) ease-in-out infinite var(--sdel); }
-@keyframes shimmerFade { 0%,100%{opacity:0;transform:scale(0.4);} 50%{opacity:0.7;transform:scale(1);} }
+@keyframes shimmerFade { 0%,100%{opacity:0;transform:scale(0.4);} 50%{opacity:0.65;transform:scale(1);} }
 
-/* ── TRANSITION SPLASH OVERLAY ── */
+/* ── SPLASH OVERLAY ── */
 #splash {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.45s ease;
-  overflow: hidden;
+  position: fixed; inset: 0; z-index: 50;
+  pointer-events: none; opacity: 0;
+  transition: opacity 0.45s ease; overflow: hidden;
 }
 #splash.show { opacity: 1; pointer-events: all; }
 
 #splash-photo {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center center;
-  opacity: 0.25;
-  filter: blur(0.5px);
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center center;
+  opacity: 0.22; filter: blur(0.5px);
 }
 #splash-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(165deg,rgba(253,246,240,0.68) 0%,rgba(253,238,230,0.60) 50%,rgba(253,246,240,0.68) 100%);
+  position: absolute; inset: 0;
+  background: linear-gradient(165deg,rgba(253,246,240,0.70) 0%,rgba(253,238,230,0.62) 50%,rgba(253,246,240,0.70) 100%);
 }
 #splash-text {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
 }
 .splash-divi {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 64px;
-  font-weight: 300;
-  color: #7a3e52;
-  letter-spacing: 6px;
-  line-height: 1;
-  opacity: 0;
-  transform: translateY(10px);
+  font-size: 64px; font-weight: 300; color: #7a3e52;
+  letter-spacing: 6px; line-height: 1;
+  opacity: 0; transform: translateY(10px);
   transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
 }
 .splash-sub {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
-  font-style: italic;
-  color: #b8866e;
+  font-size: 18px; font-style: italic; color: #b8866e;
   letter-spacing: 2px;
-  opacity: 0;
-  transform: translateY(8px);
+  opacity: 0; transform: translateY(8px);
   transition: opacity 0.4s ease 0.28s, transform 0.4s ease 0.28s;
 }
-.splash-star {
-  font-size: 16px;
-  color: #c9a84c;
-  opacity: 0;
-  transition: opacity 0.4s ease 0.4s;
-}
+.splash-star { font-size: 16px; color: #c9a84c; opacity: 0; transition: opacity 0.4s ease 0.4s; }
 #splash.show .splash-divi,
 #splash.show .splash-sub,
 #splash.show .splash-star { opacity: 1; transform: translateY(0); }
 
 /* ── SCREEN SYSTEM ── */
 .screen {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-  text-align: center;
-  overflow-y: auto;
-  opacity: 0;
-  pointer-events: none;
+  position: fixed; inset: 0; z-index: 1;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 40px 20px; text-align: center;
+  overflow-y: auto; opacity: 0; pointer-events: none;
   transition: opacity 0.5s ease;
 }
 .screen.active { opacity: 1; pointer-events: all; }
@@ -128,8 +97,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .env-wrap { cursor:pointer; margin-bottom:36px; animation:envFloat 3.5s ease-in-out infinite; transition:transform 0.2s; }
 .env-wrap:hover { animation-play-state:paused; transform:scale(1.06); }
 @keyframes envFloat { 0%,100%{transform:translateY(0) rotate(-1.5deg);} 50%{transform:translateY(-12px) rotate(1.5deg);} }
-.s1-name { font-family:'Cormorant Garamond',serif; font-size:clamp(40px,11vw,54px); font-weight:300; color:#7a3e52; letter-spacing:3px; line-height:1; margin-bottom:6px; }
-.s1-name em { font-style:italic; color:#b8707e; }
+.s1-name { font-family:'Cormorant Garamond',serif; font-size:clamp(36px,10vw,50px); font-weight:300; color:#7a3e52; letter-spacing:3px; line-height:1; margin-bottom:6px; white-space:nowrap; }
 .s1-sub  { font-family:'Cormorant Garamond',serif; font-size:19px; font-style:italic; color:#b8866e; letter-spacing:1px; margin-bottom:4px; }
 .s1-date { font-family:'Cormorant Garamond',serif; font-size:14px; color:#c9a84c; letter-spacing:3px; margin-bottom:32px; }
 .cta-btn { background:linear-gradient(135deg,#c9a84c 0%,#e8d080 50%,#c9a84c 100%); background-size:200% 100%; border:none; color:#4a2e0a; padding:15px 48px; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:500; letter-spacing:4px; text-transform:uppercase; cursor:pointer; border-radius:50px; box-shadow:0 6px 24px rgba(201,168,76,0.45); transition:all 0.3s; animation:goldGlow 3s ease-in-out infinite; }
@@ -143,8 +111,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .invite-card::after { content:'✦'; position:absolute; top:14px; right:18px; font-size:12px; color:rgba(201,168,76,0.4); }
 .card-eyebrow { font-size:9px; letter-spacing:5px; color:#c9a84c; text-transform:uppercase; margin-bottom:16px; }
 .card-intro  { font-family:'Cormorant Garamond',serif; font-size:16px; color:#8c6060; line-height:1.9; margin-bottom:6px; }
-.card-divi   { font-family:'Cormorant Garamond',serif; font-size:58px; font-weight:300; color:#7a3e52; line-height:1; letter-spacing:4px; }
-.card-kumar  { font-family:'Cormorant Garamond',serif; font-size:20px; font-style:italic; color:#b8707e; letter-spacing:2px; margin-bottom:10px; }
+.card-fullname { font-family:'Cormorant Garamond',serif; font-size:44px; font-weight:300; color:#7a3e52; line-height:1; letter-spacing:3px; white-space:nowrap; }
 .one-ring    { width:64px; height:64px; border-radius:50%; border:1.5px solid #c9a84c; background:linear-gradient(135deg,rgba(232,201,122,0.14),rgba(201,168,76,0.04)); margin:14px auto; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:32px; font-style:italic; color:#c9a84c; box-shadow:0 0 0 8px rgba(201,168,76,0.07),0 4px 20px rgba(201,168,76,0.15); }
 .card-outro  { font-family:'Cormorant Garamond',serif; font-size:15px; color:#8c6060; line-height:1.9; }
 .card-quote  { font-family:'Cormorant Garamond',serif; font-size:13px; font-style:italic; color:#b8866e; line-height:1.8; margin-top:6px; }
@@ -206,12 +173,12 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 <div id="balloon-canvas"></div>
 <div id="confetti-stage"></div>
 
-<!-- TRANSITION SPLASH -->
+<!-- SPLASH -->
 <div id="splash">
   <div id="splash-photo"></div>
   <div id="splash-overlay"></div>
   <div id="splash-text">
-    <div class="splash-divi">DIVI</div>
+    <div class="splash-divi">DIVI S KUMAR</div>
     <div class="splash-sub">is turning One</div>
     <div class="splash-star">✦ &nbsp; ✦ &nbsp; ✦</div>
   </div>
@@ -232,7 +199,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
       <text x="80" y="58" text-anchor="middle" font-family="Georgia,serif" font-size="28">💌</text>
     </svg>
   </div>
-  <div class="s1-name">DIVI <em>S Kumar</em></div>
+  <div class="s1-name">DIVI S KUMAR</div>
   <div class="s1-sub">is turning One ✦</div>
   <div class="s1-date">June 13, 2026 &nbsp;·&nbsp; 5:00 PM</div>
   <div class="gold-divider"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
@@ -245,8 +212,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
     <div class="card-eyebrow">✦ &nbsp; You are cordially invited &nbsp; ✦</div>
     <div class="gold-divider"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
     <div class="card-intro">Together with our families,<br>we joyfully invite you to celebrate</div>
-    <div class="card-divi">DIVI</div>
-    <div class="card-kumar">S Kumar</div>
+    <div class="card-fullname">DIVI S KUMAR</div>
     <div class="one-ring">I</div>
     <div class="card-outro">completing her very first<br>beautiful year on earth</div>
     <div class="gold-divider"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
@@ -349,10 +315,9 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 const API_URL    = 'https://divi-birthday-invite.onrender.com';
 const INVITE_URL = 'https://divi-doll-birthday.netlify.app';
 
-/* ── BABY PHOTO — embedded as Base64 so it works on Netlify ── */
-const BABY_IMG = 'BABY_BASE64_HERE';
+/* ── BABY PHOTO — Base64 embedded ── */
+const BABY_IMG = 'BABY_DATA_URI_PLACEHOLDER';
 
-/* inject baby photo into splash */
 document.getElementById('splash-photo').style.backgroundImage = "url('" + BABY_IMG + "')";
 
 /* ── BALLOONS ── */
@@ -386,12 +351,11 @@ function makeShimmers() {
   }
 }
 
-/* ── SPLASH TRANSITION ── */
-let splashTimer = null;
+/* ── SPLASH ── */
 function showSplash(callback) {
   const splash = document.getElementById('splash');
   splash.classList.add('show');
-  splashTimer = setTimeout(() => {
+  setTimeout(() => {
     splash.classList.remove('show');
     setTimeout(callback, 480);
   }, 1400);
@@ -458,7 +422,7 @@ async function sendToAPI(data) {
       headers : { 'Content-Type': 'application/json' },
       body    : JSON.stringify(data)
     });
-  } catch(e) { console.warn('RSVP API error (continuing):', e); }
+  } catch(e) { console.warn('RSVP API error:', e); }
 }
 
 function resetInvite() {
@@ -473,7 +437,7 @@ function resetInvite() {
 
 /* ── CONFETTI ── */
 function launchConfetti() {
-  const stage   = document.getElementById('confetti-stage');
+  const stage = document.getElementById('confetti-stage');
   stage.innerHTML = '';
   const palette = ['#f5c6d0','#e8c97a','#c9a84c','#f9d9b0','#b8707e','#f4b8cc','#fae8b8','#7a3e52','#fde8c8'];
   for (let i = 0; i < 56; i++) {
@@ -504,7 +468,7 @@ function updateCountdown() {
 
 /* ── SHARE ── */
 function shareWA() {
-  window.open('https://wa.me/?text=' + encodeURIComponent('You\'re invited to Divi\'s 1st Birthday! 🎀✨\n' + INVITE_URL), '_blank');
+  window.open('https://wa.me/?text=' + encodeURIComponent("You're invited to DIVI S KUMAR's 1st Birthday! 🎀✨\n" + INVITE_URL), '_blank');
 }
 function copyLink() {
   navigator.clipboard.writeText(INVITE_URL).then(() => {
