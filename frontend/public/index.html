@@ -145,55 +145,91 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .cp-btn { background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.45); color:#6a4a10; padding:11px 20px; border-radius:30px; font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; }
 .cp-btn:hover { background:rgba(201,168,76,0.22); transform:translateY(-2px); }
 
-/* ── SHAKE HINT ── */
-.shake-hint {
+/* ── DOUBLE-TAP HINT ── */
+.tap-hint {
   display: flex; flex-direction: column; align-items: center; gap: 6px;
   margin-top: 22px;
-  animation: hintPulse 2s ease-in-out infinite;
+  animation: hintPulse 2.2s ease-in-out infinite;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }
-@keyframes hintPulse { 0%,100%{opacity:0.55;transform:scale(1);} 50%{opacity:1;transform:scale(1.05);} }
-.shake-phone-icon { font-size: 28px; animation: phoneWiggle 1.4s ease-in-out infinite; }
-@keyframes phoneWiggle {
-  0%,100% { transform: rotate(0deg); }
-  20%     { transform: rotate(-18deg) translateX(-4px); }
-  40%     { transform: rotate(18deg) translateX(4px); }
-  60%     { transform: rotate(-12deg) translateX(-3px); }
-  80%     { transform: rotate(12deg) translateX(3px); }
+@keyframes hintPulse { 0%,100%{opacity:0.5;transform:scale(1);} 50%{opacity:1;transform:scale(1.07);} }
+.tap-finger { font-size: 30px; animation: fingerBounce 1.2s ease-in-out infinite; }
+@keyframes fingerBounce {
+  0%,100% { transform: translateY(0) scale(1); }
+  30%     { transform: translateY(-6px) scale(1.1); }
+  55%     { transform: translateY(0) scale(0.95); }
+  70%     { transform: translateY(-3px) scale(1.05); }
+  85%     { transform: translateY(0) scale(1); }
 }
-.shake-label { font-size: 9px; letter-spacing: 3px; color: #b8707e; text-transform: uppercase; font-family: 'Montserrat', sans-serif; }
+.tap-label { font-size: 9px; letter-spacing: 3px; color: #b8707e; text-transform: uppercase; font-family: 'Montserrat', sans-serif; }
+.tap-ring {
+  width: 52px; height: 52px; border-radius: 50%;
+  border: 1.5px solid rgba(184,112,126,0.5);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.tap-ring::after {
+  content: '';
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.35);
+  animation: ripple 2.2s ease-out infinite;
+}
+@keyframes ripple {
+  0%   { opacity: 0.8; transform: scale(0.85); }
+  100% { opacity: 0;   transform: scale(1.5); }
+}
 
 /* ── PHOTO REVEAL OVERLAY ── */
 #photo-reveal {
   position: fixed; inset: 0; z-index: 200;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: rgba(90, 40, 55, 0.88);
-  backdrop-filter: blur(6px);
+  background: rgba(90, 40, 55, 0.90);
+  backdrop-filter: blur(8px);
   opacity: 0; pointer-events: none;
-  transition: opacity 0.55s ease;
+  transition: opacity 0.5s ease;
 }
 #photo-reveal.show { opacity: 1; pointer-events: all; }
+
+/* circular frame wraps the blurred-to-clear image */
 .reveal-frame {
   position: relative;
   width: min(82vw, 340px); height: min(82vw, 340px);
   border-radius: 50%;
   border: 3px solid #c9a84c;
-  box-shadow: 0 0 0 8px rgba(201,168,76,0.18), 0 12px 50px rgba(0,0,0,0.4);
+  box-shadow: 0 0 0 8px rgba(201,168,76,0.18), 0 12px 50px rgba(0,0,0,0.45);
   overflow: hidden;
-  animation: revealPop 0.7s cubic-bezier(0.34,1.56,0.64,1);
+  animation: revealPop 0.7s cubic-bezier(0.34,1.56,0.64,1) both;
 }
 @keyframes revealPop { from{transform:scale(0.3) rotate(-15deg);opacity:0;} to{transform:scale(1) rotate(0deg);opacity:1;} }
-.reveal-frame img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+
+/* the image starts fully blurred and clears over 1.6 s */
+.reveal-frame img {
+  width:100%; height:100%;
+  object-fit:cover; object-position:center top;
+  filter: blur(18px) brightness(0.85);
+  transform: scale(1.08);
+  animation: unblur 1.6s ease 0.25s forwards;
+}
+@keyframes unblur {
+  0%   { filter: blur(18px) brightness(0.85); transform: scale(1.08); }
+  60%  { filter: blur(4px)  brightness(0.95); transform: scale(1.03); }
+  100% { filter: blur(0px)  brightness(1);    transform: scale(1);    }
+}
+
 .reveal-caption {
   font-family: 'Cormorant Garamond', serif;
   font-size: 22px; font-style: italic;
   color: #fdf6f0; margin-top: 22px;
-  animation: revealFadeUp 0.6s ease 0.3s both;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  animation: revealFadeUp 0.6s ease 0.35s both;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.35);
 }
 .reveal-sub {
   font-size: 9px; letter-spacing: 4px; color: #e8c97a;
   text-transform: uppercase; margin-top: 6px;
-  animation: revealFadeUp 0.6s ease 0.5s both;
+  animation: revealFadeUp 0.6s ease 0.55s both;
 }
 @keyframes revealFadeUp { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
 .reveal-close {
@@ -202,7 +238,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   color: #e8c97a; padding: 10px 28px; border-radius: 30px;
   font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 3px;
   text-transform: uppercase; cursor: pointer; transition: all 0.3s;
-  animation: revealFadeUp 0.6s ease 0.7s both;
+  animation: revealFadeUp 0.6s ease 0.75s both;
 }
 .reveal-close:hover { background: rgba(201,168,76,0.15); }
 
@@ -219,7 +255,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 <!-- PHOTO REVEAL OVERLAY -->
 <div id="photo-reveal">
   <div class="reveal-frame">
-    <img src="./DIVI_baby.jpeg" alt="Divi" />
+    <img id="reveal-img" src="./DIVI_baby.jpeg" alt="Divi" />
   </div>
   <div class="reveal-caption">Our little Divi ✨</div>
   <div class="reveal-sub">✦ &nbsp; turning one &nbsp; ✦</div>
@@ -269,7 +305,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
     <div class="one-ring">I</div>
     <div class="card-outro">completing her very first<br>beautiful year on earth</div>
     <div class="gold-divider"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
-    <div class="card-quote">"365 days of love, laughter<br>&amp; little miracles"</div>
+    <div class="card-quote">&ldquo;365 days of love, laughter<br>&amp; little miracles&rdquo;</div>
   </div>
   <button class="nav-link" onclick="goTo(3)">View Details &nbsp; →</button>
 </section>
@@ -382,10 +418,12 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
     <button class="cp-btn" onclick="copyLink()" id="copy-btn">🔗 &nbsp; Copy Link</button>
   </div>
 
-  <!-- Shake hint — shown to everyone on screen5 -->
-  <div class="shake-hint" id="shake-hint">
-    <div class="shake-phone-icon">📱</div>
-    <div class="shake-label">Shake to reveal Divi ✨</div>
+  <!-- Double-tap hint -->
+  <div class="tap-hint" id="tap-hint" ondblclick="openReveal()" ontouchend="handleTapHint(event)">
+    <div class="tap-ring">
+      <div class="tap-finger">👆</div>
+    </div>
+    <div class="tap-label">Double-tap to reveal Divi ✨</div>
   </div>
 
   <button class="nav-link" onclick="resetInvite()">← Back to start</button>
@@ -446,7 +484,7 @@ function goTo(n) {
         target.style.opacity = '1'; target.style.pointerEvents = 'all';
       }));
       window.scrollTo({ top: 0, behavior: 'instant' });
-      if (n === 5) { launchConfetti(); initShake(); }
+      if (n === 5) { launchConfetti(); }
     });
   }, 400);
 }
@@ -494,7 +532,6 @@ function resetInvite() {
   document.getElementById('adults').value = '2';
   document.getElementById('kids').value   = '0';
   document.getElementById('food').value   = 'veg';
-  stopShake();
   goTo(1);
 }
 
@@ -514,49 +551,51 @@ function launchConfetti() {
   setTimeout(() => { stage.innerHTML = ''; }, 3500);
 }
 
-/* ── SHAKE DETECTION ── */
-let shakeActive = false;
-let lastShake   = 0;
-let shakeCooldown = false;
-const SHAKE_THRESHOLD = 18;
-
-function onShake(e) {
-  if (!shakeActive || shakeCooldown) return;
-  const sc = e.accelerationIncludingGravity || e.acceleration || {};
-  const ax = Math.abs(sc.x || 0);
-  const ay = Math.abs(sc.y || 0);
-  const az = Math.abs(sc.z || 0);
+/* ── DOUBLE-TAP DETECTION ── */
+let tapHintLastTap = 0;
+function handleTapHint(e) {
+  e.preventDefault();
   const now = Date.now();
-  if ((ax + ay + az) > SHAKE_THRESHOLD && now - lastShake > 800) {
-    lastShake = now;
+  if (now - tapHintLastTap < 380) {
+    tapHintLastTap = 0;
     openReveal();
+  } else {
+    tapHintLastTap = now;
   }
 }
 
-function initShake() {
-  shakeActive = true;
-  if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
-    DeviceMotionEvent.requestPermission()
-      .then(r => { if (r === 'granted') window.addEventListener('devicemotion', onShake); })
-      .catch(() => {});
-  } else if (typeof DeviceMotionEvent !== 'undefined') {
-    window.addEventListener('devicemotion', onShake);
+/* Also attach double-tap anywhere on screen5 for convenience */
+let screen5LastTap = 0;
+document.getElementById('screen5').addEventListener('touchend', function(e) {
+  if (e.target.closest('#photo-reveal') || e.target.closest('button') || e.target.closest('.nav-link')) return;
+  const now = Date.now();
+  if (now - screen5LastTap < 380) {
+    screen5LastTap = 0;
+    openReveal();
+  } else {
+    screen5LastTap = now;
   }
-}
+});
+document.getElementById('screen5').addEventListener('dblclick', function(e) {
+  if (e.target.closest('#photo-reveal') || e.target.closest('button') || e.target.closest('.nav-link')) return;
+  openReveal();
+});
 
-function stopShake() {
-  shakeActive = false;
-  window.removeEventListener('devicemotion', onShake);
-}
-
+let revealOpen = false;
 function openReveal() {
-  shakeCooldown = true;
+  if (revealOpen) return;
+  revealOpen = true;
+  /* restart the blur-to-clear animation by cloning the img */
+  const frame = document.querySelector('.reveal-frame');
+  const oldImg = document.getElementById('reveal-img');
+  const newImg = oldImg.cloneNode(true);
+  frame.replaceChild(newImg, oldImg);
   document.getElementById('photo-reveal').classList.add('show');
   launchConfetti();
-  setTimeout(() => { shakeCooldown = false; }, 2000);
 }
 
 function closeReveal() {
+  revealOpen = false;
   document.getElementById('photo-reveal').classList.remove('show');
 }
 
