@@ -151,7 +151,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .f-select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23c9a84c'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center; background-size:16px; padding-right:36px; -webkit-appearance:none; -moz-appearance:none; appearance:none; }
 .submit-btn { width:100%; padding:15px; background:linear-gradient(135deg,#c9a84c 0%,#e8d080 50%,#c9a84c 100%); background-size:200%; color:#4a2e0a; border:none; border-radius:10px; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; cursor:pointer; box-shadow:0 6px 18px rgba(201,168,76,0.3); transition:all 0.3s; animation:goldGlow 3s ease-in-out infinite; }
 .submit-btn:hover { transform:translateY(-2px); }
-.submit-btn:disabled { opacity:0.6; cursor:not-allowed; }
 
 /* SCREEN 5 */
 #screen5 { background:linear-gradient(165deg,#fdf6f0 0%,#fdeee6 50%,#fdf6f0 100%); }
@@ -314,9 +313,9 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 
 <script>
 const API_URL    = 'https://divi-birthday-invite.onrender.com';
-const INVITE_URL = 'https://divi-doll-birthday.netlify.app';
+const INVITE_URL = 'https://divi-doll-birthday.pages.dev';
 
-/* ── BABY PHOTO — loaded from file ── */
+/* ── BABY PHOTO ── */
 document.getElementById('splash-photo').style.backgroundImage = "url('./DIVI_baby.jpeg')";
 
 /* ── BALLOONS ── */
@@ -388,6 +387,7 @@ function showForm() {
 }
 
 function declineRSVP() {
+  // Fire-and-forget — don't await
   sendToAPI({ name: 'Anonymous', attending: false, adults: 0, kids: 0, food: 'none' });
   document.getElementById('success-icon').textContent  = '💌';
   document.getElementById('success-title').textContent = "We'll miss you!";
@@ -395,33 +395,35 @@ function declineRSVP() {
   goTo(5);
 }
 
-async function submitRSVP() {
+function submitRSVP() {
   const name = document.getElementById('guest-name').value.trim() || 'Dear Family';
-  const btn  = document.getElementById('submit-btn');
-  btn.disabled = true; btn.textContent = 'Sending...';
-  await sendToAPI({
+
+  // ✅ Set success screen content FIRST
+  document.getElementById('success-icon').textContent  = '🎀';
+  document.getElementById('success-title').textContent = "Yay! We can't wait!";
+  document.getElementById('success-msg').innerHTML     =
+    `So thrilled to celebrate with Dee's family!<br>Divi can't wait to see you on June 13th ✦`;
+
+  // ✅ Navigate IMMEDIATELY — no waiting for API
+  goTo(5);
+
+  // ✅ Fire API in background — does not block UI at all
+  sendToAPI({
     name,
     attending : true,
     adults    : parseInt(document.getElementById('adults').value) || 2,
     kids      : parseInt(document.getElementById('kids').value)   || 0,
     food      : document.getElementById('food').value
   });
-  btn.disabled = false; btn.textContent = '✦  Confirm Attendance  ✦';
-  document.getElementById('success-icon').textContent  = '🎀';
-  document.getElementById('success-title').textContent = "Yay! We can't wait!";
-  document.getElementById('success-msg').innerHTML     =
-    `So thrilled to celebrate with Dee's family!<br>Divi can't wait to see you on June 13th ✦`;
-  goTo(5);
 }
 
-async function sendToAPI(data) {
-  try {
-    await fetch(API_URL + '/api/rsvp', {
-      method  : 'POST',
-      headers : { 'Content-Type': 'application/json' },
-      body    : JSON.stringify(data)
-    });
-  } catch(e) { console.warn('RSVP API error:', e); }
+function sendToAPI(data) {
+  // Non-blocking — returns promise but never awaited
+  return fetch(API_URL + '/api/rsvp', {
+    method  : 'POST',
+    headers : { 'Content-Type': 'application/json' },
+    body    : JSON.stringify(data)
+  }).catch(e => console.warn('RSVP API error:', e));
 }
 
 function resetInvite() {
