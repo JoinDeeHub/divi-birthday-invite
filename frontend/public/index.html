@@ -6,7 +6,7 @@
 <title>DIVI S KUMAR – 1st Birthday Invitation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { min-height: 100%; }
@@ -14,98 +14,206 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 
 /* ── BALLOON CANVAS ── */
 #balloon-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-
 .balloon { position: absolute; bottom: -160px; display: flex; flex-direction: column; align-items: center; animation: riseUp var(--dur) ease-in-out infinite var(--delay); will-change: transform; }
 @keyframes riseUp {
-  0%   { transform: translateY(0)      translateX(0px)          rotate(0deg);        opacity: 0;    }
-  6%   {                                                                              opacity: 0.9;  }
-  50%  { transform: translateY(-55vh)  translateX(var(--sway))  rotate(var(--lean)); opacity: 0.75; }
-  94%  {                                                                              opacity: 0.3;  }
-  100% { transform: translateY(-115vh) translateX(0px)          rotate(0deg);        opacity: 0;    }
+  0%   { transform: translateY(0) translateX(0px) rotate(0deg); opacity: 0; }
+  6%   { opacity: 0.9; }
+  50%  { transform: translateY(-55vh) translateX(var(--sway)) rotate(var(--lean)); opacity: 0.75; }
+  94%  { opacity: 0.3; }
+  100% { transform: translateY(-115vh) translateX(0px) rotate(0deg); opacity: 0; }
 }
 .b-body  { width: var(--bw); height: calc(var(--bw)*1.26); border-radius: 50% 50% 48% 48%/55% 55% 45% 45%; position: relative; box-shadow: inset -5px -4px 10px rgba(0,0,0,0.08), inset 3px 3px 8px rgba(255,255,255,0.5); }
 .b-shine { position: absolute; top:18%; left:18%; width:30%; height:22%; background:rgba(255,255,255,0.6); border-radius:50%; transform:rotate(-30deg); }
 .b-knot  { width:6px; height:7px; background:inherit; border-radius:0 0 3px 3px; margin-top:-2px; filter:brightness(0.7); }
 .b-string{ width:1px; height:50px; background:linear-gradient(to bottom,rgba(180,140,100,0.45),rgba(180,140,100,0)); margin-top:1px; }
-
 .shimmer-dot { position:absolute; border-radius:50%; background:radial-gradient(circle,rgba(232,201,122,0.7) 0%,transparent 70%); pointer-events:none; animation:shimmerFade var(--sd) ease-in-out infinite var(--sdel); }
 @keyframes shimmerFade { 0%,100%{opacity:0;transform:scale(0.4);} 50%{opacity:0.65;transform:scale(1);} }
 
-/* ── SPLASH OVERLAY ── */
-#splash {
-  position: fixed; inset: 0; z-index: 50;
-  pointer-events: none; opacity: 0;
-  transition: opacity 0.45s ease; overflow: hidden;
-}
-#splash.show { opacity: 1; pointer-events: all; }
-
-#splash-photo {
-  position: absolute; inset: 0;
-  background-image: url('./DIVI_baby.jpeg');
-  background-size: cover; background-position: center center;
-  opacity: 0.22; filter: blur(0.5px);
-}
-#splash-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(165deg,rgba(253,246,240,0.70) 0%,rgba(253,238,230,0.62) 50%,rgba(253,246,240,0.70) 100%);
-}
-#splash-text {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 8px;
-}
-.splash-divi {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 64px; font-weight: 300; color: #7a3e52;
-  letter-spacing: 6px; line-height: 1;
-  opacity: 0; transform: translateY(10px);
-  transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
-}
-.splash-sub {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px; font-style: italic; color: #b8866e;
-  letter-spacing: 2px;
-  opacity: 0; transform: translateY(8px);
-  transition: opacity 0.4s ease 0.28s, transform 0.4s ease 0.28s;
-}
-.splash-star { font-size: 16px; color: #c9a84c; opacity: 0; transition: opacity 0.4s ease 0.4s; }
-#splash.show .splash-divi,
-#splash.show .splash-sub,
-#splash.show .splash-star { opacity: 1; transform: translateY(0); }
+/* ── SPLASH ── */
+#splash { position:fixed; inset:0; z-index:50; pointer-events:none; opacity:0; transition:opacity 0.45s ease; overflow:hidden; }
+#splash.show { opacity:1; pointer-events:all; }
+#splash-photo { position:absolute; inset:0; background-image:url('./DIVI_baby.jpeg'); background-size:cover; background-position:center; opacity:0.22; filter:blur(0.5px); }
+#splash-overlay { position:absolute; inset:0; background:linear-gradient(165deg,rgba(253,246,240,0.70) 0%,rgba(253,238,230,0.62) 50%,rgba(253,246,240,0.70) 100%); }
+#splash-text { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; }
+.splash-divi { font-family:'Cormorant Garamond',serif; font-size:64px; font-weight:300; color:#7a3e52; letter-spacing:6px; line-height:1; opacity:0; transform:translateY(10px); transition:opacity 0.4s ease 0.15s,transform 0.4s ease 0.15s; }
+.splash-sub  { font-family:'Cormorant Garamond',serif; font-size:18px; font-style:italic; color:#b8866e; letter-spacing:2px; opacity:0; transform:translateY(8px); transition:opacity 0.4s ease 0.28s,transform 0.4s ease 0.28s; }
+.splash-star { font-size:16px; color:#c9a84c; opacity:0; transition:opacity 0.4s ease 0.4s; }
+#splash.show .splash-divi, #splash.show .splash-sub, #splash.show .splash-star { opacity:1; transform:translateY(0); }
 
 /* ── SCREEN SYSTEM ── */
-.screen {
-  position: fixed; inset: 0; z-index: 1;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 40px 20px; text-align: center;
-  overflow-y: auto; opacity: 0; pointer-events: none;
-  transition: opacity 0.5s ease;
-}
-.screen.active { opacity: 1; pointer-events: all; }
-
+.screen { position:fixed; inset:0; z-index:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 20px; text-align:center; overflow-y:auto; opacity:0; pointer-events:none; transition:opacity 0.5s ease; }
+.screen.active { opacity:1; pointer-events:all; }
 .gold-divider { display:flex; align-items:center; gap:10px; margin:16px auto; width:220px; }
 .g-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,#c9a84c,transparent); }
 .g-diam { width:6px; height:6px; background:#c9a84c; transform:rotate(45deg); flex-shrink:0; }
-
 .eyebrow { font-size:10px; letter-spacing:4px; color:#c9a84c; text-transform:uppercase; margin-bottom:20px; }
 .nav-link { background:transparent; border:none; color:#c9a84c; font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; cursor:pointer; padding:10px 20px; margin-top:24px; border-bottom:1px solid transparent; transition:border-color 0.25s; }
 .nav-link:hover { border-bottom-color:#c9a84c; }
 
-/* SCREEN 1 */
-#screen1 { background:linear-gradient(165deg,#fdf6f0 0%,#fdeee6 50%,#fdf6f0 100%); }
-.s1-tag { font-size:10px; letter-spacing:5px; color:#b8866e; text-transform:uppercase; margin-bottom:32px; }
-.env-wrap { cursor:pointer; margin-bottom:36px; animation:envFloat 3.5s ease-in-out infinite; transition:transform 0.2s; }
-.env-wrap:hover { animation-play-state:paused; transform:scale(1.06); }
-@keyframes envFloat { 0%,100%{transform:translateY(0) rotate(-1.5deg);} 50%{transform:translateY(-12px) rotate(1.5deg);} }
-.s1-name { font-family:'Cormorant Garamond',serif; font-size:clamp(36px,10vw,50px); font-weight:300; color:#7a3e52; letter-spacing:3px; line-height:1; margin-bottom:6px; white-space:nowrap; }
-.s1-sub  { font-family:'Cormorant Garamond',serif; font-size:19px; font-style:italic; color:#b8866e; letter-spacing:1px; margin-bottom:4px; }
-.s1-date { font-family:'Cormorant Garamond',serif; font-size:14px; color:#c9a84c; letter-spacing:3px; margin-bottom:32px; }
-.cta-btn { background:linear-gradient(135deg,#c9a84c 0%,#e8d080 50%,#c9a84c 100%); background-size:200% 100%; border:none; color:#4a2e0a; padding:15px 48px; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:500; letter-spacing:4px; text-transform:uppercase; cursor:pointer; border-radius:50px; box-shadow:0 6px 24px rgba(201,168,76,0.45); transition:all 0.3s; animation:goldGlow 3s ease-in-out infinite; }
-@keyframes goldGlow { 0%,100%{background-position:0% 50%;box-shadow:0 6px 24px rgba(201,168,76,0.4);} 50%{background-position:100% 50%;box-shadow:0 6px 32px rgba(201,168,76,0.65);} }
-.cta-btn:hover { transform:translateY(-3px); }
+/* ── SCREEN 1 – REDESIGNED ── */
+#screen1 {
+  background: radial-gradient(ellipse at 50% 0%, #fdeee6 0%, #fdf6f0 60%);
+  justify-content: flex-start;
+  padding: 0;
+  overflow-y: auto;
+}
+.s1-inner {
+  display: flex; flex-direction: column; align-items: center;
+  width: 100%; max-width: 420px; margin: 0 auto;
+  padding: 36px 24px 32px;
+  position: relative;
+}
 
-/* SCREEN 2 */
+/* Crown */
+.s1-crown { font-size: 24px; color: #c9a84c; margin-bottom: 6px; line-height: 1; animation: crownPulse 3s ease-in-out infinite; }
+@keyframes crownPulse { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-3px) scale(1.06);} }
+
+/* Eyebrow */
+.s1-eyebrow { font-size: 9.5px; letter-spacing: 5px; color: #b8866e; text-transform: uppercase; margin-bottom: 18px; }
+
+/* Sparkle stars */
+.s1-stars { font-size: 11px; color: #c9a84c; letter-spacing: 6px; margin-bottom: 4px; opacity: 0.7; }
+
+/* Floral envelope area */
+.s1-env-zone {
+  position: relative;
+  width: 280px; height: 220px;
+  margin: 0 auto 4px;
+  cursor: pointer;
+  animation: envFloat 4s ease-in-out infinite;
+}
+.s1-env-zone:hover { animation-play-state: paused; transform: scale(1.04); }
+@keyframes envFloat { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+
+/* SVG envelope */
+.s1-env-svg { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; }
+
+/* Floral corner decorations (CSS-drawn) */
+.s1-flower { position: absolute; font-size: var(--fs, 28px); line-height: 1; z-index: 3; opacity: 0.88; }
+.s1-flower.fl-tl { top:4px;  left:10px;  transform: rotate(-20deg); --fs:32px; }
+.s1-flower.fl-tr { top:10px; right:4px;  transform: rotate(15deg);  --fs:28px; }
+.s1-flower.fl-bl { bottom:10px; left:6px;  transform: rotate(-30deg); --fs:24px; }
+.s1-flower.fl-br { bottom:12px; right:8px; transform: rotate(20deg);  --fs:36px; }
+.s1-flower.fl-ml { top:50%; left:0px; transform: translateY(-50%) rotate(-10deg); --fs:20px; }
+.s1-flower.fl-mr { top:50%; right:0px; transform: translateY(-50%) rotate(10deg);  --fs:22px; }
+
+/* Gold sparkles */
+.s1-sparkle { position: absolute; color: #c9a84c; font-size: 13px; animation: sparkleAnim 2.5s ease-in-out infinite; }
+.s1-sparkle.sp1 { top:18px;  left:55px;  animation-delay: 0s; }
+.s1-sparkle.sp2 { top:30px;  right:50px; animation-delay: 0.6s; }
+.s1-sparkle.sp3 { bottom:40px; left:40px; animation-delay: 1.1s; }
+.s1-sparkle.sp4 { bottom:50px; right:35px; animation-delay: 1.7s; }
+@keyframes sparkleAnim { 0%,100%{opacity:0.3;transform:scale(0.7);} 50%{opacity:1;transform:scale(1.2);} }
+
+/* Name */
+.s1-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 9vw, 46px);
+  font-weight: 600;
+  color: #7a3e52;
+  letter-spacing: 3px;
+  line-height: 1;
+  margin-bottom: 8px;
+  white-space: nowrap;
+}
+
+/* Italic subtitle */
+.s1-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-style: italic;
+  color: #5c3a4a;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  display: flex; align-items: center; gap: 6px; justify-content: center;
+}
+.s1-sub .script {
+  font-family: 'Great Vibes', cursive;
+  font-size: 30px;
+  font-style: normal;
+  color: #7a3e52;
+}
+.s1-heart { color: #c9788a; font-size: 16px; }
+
+/* Ornament divider (leaf-diamond-leaf) */
+.s1-ornament {
+  display: flex; align-items: center; gap: 6px;
+  margin: 10px 0;
+  color: #c9a84c;
+  font-size: 13px;
+  opacity: 0.75;
+}
+.s1-ornament .orn-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(201,168,76,0.5),transparent); max-width:60px; }
+
+/* Date-time row */
+.s1-dt-row {
+  display: flex; align-items: flex-start; gap: 0;
+  margin: 4px 0 14px;
+  width: 100%; max-width: 280px;
+}
+.s1-dt-col {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.s1-dt-icon { font-size: 20px; margin-bottom: 2px; }
+.s1-dt-label { font-size: 11px; letter-spacing: 2px; color: #c9a84c; text-transform: uppercase; font-weight: 500; }
+.s1-dt-value { font-family: 'Cormorant Garamond', serif; font-size: 14px; color: #7a3e52; letter-spacing: 1px; line-height: 1.3; }
+.s1-dt-sep {
+  width: 1px; background: rgba(201,168,76,0.4);
+  margin: 0 12px; align-self: stretch;
+  position: relative;
+}
+.s1-dt-sep::after {
+  content: '♥'; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 10px; color: #c9a84c;
+  background: #fdf6f0; padding: 2px 0;
+}
+
+/* Tagline */
+.s1-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14.5px;
+  font-style: italic;
+  color: #8c6060;
+  line-height: 1.75;
+  margin-bottom: 6px;
+}
+
+/* Bottom ornament */
+.s1-bot-orn {
+  display: flex; align-items: center; gap: 8px;
+  margin: 6px 0 20px;
+  font-size: 14px;
+  color: #c9a84c;
+  opacity: 0.75;
+}
+.s1-bot-orn .bol { color: #e8a0b0; font-size:13px; }
+
+/* CTA */
+.s1-cta {
+  background: linear-gradient(135deg, #c2996e 0%, #d4af6e 40%, #c9a84c 60%, #b8963e 100%);
+  background-size: 200% 100%;
+  border: none;
+  color: #fff8ee;
+  padding: 16px 52px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 50px;
+  box-shadow: 0 6px 28px rgba(180,140,80,0.45), 0 2px 0 rgba(255,255,255,0.15) inset;
+  transition: all 0.3s;
+  animation: goldGlow 3s ease-in-out infinite;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 8px;
+}
+@keyframes goldGlow { 0%,100%{background-position:0% 50%;box-shadow:0 6px 24px rgba(201,168,76,0.4);} 50%{background-position:100% 50%;box-shadow:0 6px 36px rgba(201,168,76,0.7);} }
+.s1-cta:hover { transform: translateY(-3px); }
+.s1-cta .cta-star { font-size: 10px; opacity: 0.85; }
+
+/* ── SCREENS 2-5 (unchanged) ── */
 #screen2 { background:#fdf6f0; }
 .invite-card { background:#fffaf7; border:1px solid rgba(201,168,76,0.35); border-radius:20px; padding:36px 28px; width:100%; max-width:360px; box-shadow:0 1px 0 rgba(201,168,76,0.3) inset,0 12px 48px rgba(180,140,110,0.18); position:relative; overflow:hidden; }
 .invite-card::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 15% 10%,rgba(232,201,122,0.13) 0%,transparent 55%),radial-gradient(ellipse at 85% 90%,rgba(232,158,158,0.10) 0%,transparent 55%); pointer-events:none; }
@@ -117,7 +225,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .card-outro  { font-family:'Cormorant Garamond',serif; font-size:15px; color:#8c6060; line-height:1.9; }
 .card-quote  { font-family:'Cormorant Garamond',serif; font-size:13px; font-style:italic; color:#b8866e; line-height:1.8; margin-top:6px; }
 
-/* SCREEN 3 */
 #screen3 { background:#fdf6f0; }
 .detail-card { background:#fffaf7; border:1px solid rgba(201,168,76,0.25); border-radius:14px; padding:16px 20px; width:100%; max-width:340px; margin-bottom:12px; display:flex; align-items:center; gap:16px; text-align:left; box-shadow:0 2px 16px rgba(180,140,110,0.1); transition:box-shadow 0.25s,transform 0.25s; }
 .detail-card:hover { box-shadow:0 6px 24px rgba(180,140,110,0.18); transform:translateY(-2px); }
@@ -134,7 +241,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .cd-lbl  { font-size:8px; letter-spacing:2px; color:rgba(232,201,122,0.65); text-transform:uppercase; margin-top:4px; display:block; }
 .cd-sep  { font-family:'Cormorant Garamond',serif; font-size:36px; color:rgba(201,168,76,0.55); line-height:1.05; padding:0 2px; align-self:flex-start; }
 
-/* SCREEN 4 */
 #screen4 { background:#fdf6f0; }
 .rsvp-title { font-family:'Cormorant Garamond',serif; font-size:38px; font-weight:300; color:#7a3e52; margin-bottom:6px; }
 .rsvp-sub   { font-size:10px; letter-spacing:3px; color:#c9a84c; text-transform:uppercase; margin-bottom:30px; }
@@ -153,7 +259,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .submit-btn:hover { transform:translateY(-2px); }
 .submit-btn:disabled { opacity:0.6; cursor:not-allowed; }
 
-/* SCREEN 5 */
 #screen5 { background:linear-gradient(165deg,#fdf6f0 0%,#fdeee6 50%,#fdf6f0 100%); }
 #confetti-stage { position:fixed; inset:0; pointer-events:none; z-index:99; overflow:hidden; }
 .cp { position:absolute; top:-20px; animation:cpFall var(--d) ease-in forwards var(--dl); }
@@ -185,26 +290,126 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   </div>
 </div>
 
-<!-- SCREEN 1 — LANDING -->
+<!-- SCREEN 1 — REDESIGNED LANDING -->
 <section class="screen active" id="screen1">
-  <div class="s1-tag">A First Birthday Celebration</div>
-  <div class="env-wrap" onclick="goTo(2)" role="button" aria-label="Open invitation">
-    <svg width="160" height="120" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="8" y="26" width="144" height="88" rx="10" fill="#f5d5c8" stroke="#e0a898" stroke-width="1.2"/>
-      <polygon points="8,26 80,76 152,26" fill="#e8c4b4" stroke="#e0a898" stroke-width="1"/>
-      <polygon points="8,26 8,114 80,70" fill="#eecdbf"/>
-      <polygon points="152,26 152,114 80,70" fill="#eecdbf"/>
-      <polygon points="8,114 152,114 80,70" fill="#f5d5c8"/>
-      <circle cx="80" cy="93" r="13" fill="#e8c97a" stroke="#c9a84c" stroke-width="1"/>
-      <text x="80" y="97" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#7a5a1e">✦</text>
-      <text x="80" y="58" text-anchor="middle" font-family="Georgia,serif" font-size="28">💌</text>
-    </svg>
+  <div class="s1-inner">
+
+    <!-- Crown -->
+    <div class="s1-crown">
+      <svg width="36" height="28" viewBox="0 0 36 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 24 L2 10 L9 16 L18 4 L27 16 L34 10 L34 24 Z" fill="#c9a84c" opacity="0.9"/>
+        <rect x="2" y="24" width="32" height="3" rx="1.5" fill="#b8963e"/>
+        <circle cx="18" cy="4" r="2" fill="#e8d080"/>
+        <circle cx="2" cy="10" r="2" fill="#e8d080"/>
+        <circle cx="34" cy="10" r="2" fill="#e8d080"/>
+      </svg>
+    </div>
+
+    <!-- Eyebrow -->
+    <div class="s1-eyebrow">A First Birthday Celebration</div>
+
+    <!-- Sparkle row -->
+    <div class="s1-stars">✦ &nbsp;&nbsp; ✦ &nbsp;&nbsp; ✦</div>
+
+    <!-- Floral envelope zone -->
+    <div class="s1-env-zone" onclick="goTo(2)" role="button" aria-label="Open invitation">
+
+      <!-- Corner flowers -->
+      <span class="s1-flower fl-tl">🌸</span>
+      <span class="s1-flower fl-tr">🌷</span>
+      <span class="s1-flower fl-bl">🌿</span>
+      <span class="s1-flower fl-br">🌸</span>
+      <span class="s1-flower fl-ml">🌿</span>
+      <span class="s1-flower fl-mr">🌷</span>
+
+      <!-- Sparkles around envelope -->
+      <span class="s1-sparkle sp1">✦</span>
+      <span class="s1-sparkle sp2">✶</span>
+      <span class="s1-sparkle sp3">✦</span>
+      <span class="s1-sparkle sp4">✶</span>
+
+      <!-- Envelope SVG -->
+      <svg class="s1-env-svg" width="190" height="148" viewBox="0 0 190 148" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Envelope body -->
+        <rect x="10" y="32" width="170" height="106" rx="12" fill="#f5cfc4" stroke="#e8a898" stroke-width="1.4"/>
+        <!-- Envelope flap (closed) -->
+        <path d="M10 32 Q95 96 180 32" fill="#ebbfb4" stroke="#e8a898" stroke-width="1.2"/>
+        <!-- Side triangles for depth -->
+        <path d="M10 32 L10 138 L80 86" fill="#f0c8be" stroke="none"/>
+        <path d="M180 32 L180 138 L110 86" fill="#f0c8be" stroke="none"/>
+        <!-- Bottom flap -->
+        <path d="M10 138 L180 138 L110 86 L80 86 Z" fill="#f5cfc4" stroke="none"/>
+        <!-- Wax seal -->
+        <circle cx="95" cy="115" r="18" fill="#c9a84c" stroke="#b8963e" stroke-width="1.2"/>
+        <circle cx="95" cy="115" r="14" fill="#d4b85a" stroke="none" opacity="0.6"/>
+        <text x="95" y="120" text-anchor="middle" font-family="Georgia,serif" font-size="14" fill="#7a5a1e">♥</text>
+        <!-- Letter peek -->
+        <rect x="68" y="38" width="54" height="38" rx="4" fill="#fffaf7" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <line x1="75" y1="50" x2="115" y2="50" stroke="#e8c97a" stroke-width="1" opacity="0.6"/>
+        <line x1="75" y1="57" x2="115" y2="57" stroke="#e8c97a" stroke-width="1" opacity="0.6"/>
+        <line x1="75" y1="64" x2="105" y2="64" stroke="#e8c97a" stroke-width="1" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <!-- Name -->
+    <div class="s1-name">DIVI S KUMAR</div>
+
+    <!-- Italic subtitle -->
+    <div class="s1-sub">
+      <span>is turning</span>
+      <span class="script">One</span>
+      <span class="s1-heart">♥</span>
+    </div>
+
+    <!-- Ornament divider -->
+    <div class="s1-ornament">
+      <div class="orn-line"></div>
+      <span>❮❮</span>
+      <span style="font-size:8px;">◆</span>
+      <span>❯❯</span>
+      <div class="orn-line"></div>
+    </div>
+
+    <!-- Date + Time row -->
+    <div class="s1-dt-row">
+      <div class="s1-dt-col">
+        <div class="s1-dt-icon">📅</div>
+        <div class="s1-dt-label">Date</div>
+        <div class="s1-dt-value">JUNE 13, 2026</div>
+      </div>
+      <div class="s1-dt-sep"></div>
+      <div class="s1-dt-col">
+        <div class="s1-dt-icon">🕐</div>
+        <div class="s1-dt-label">Time</div>
+        <div class="s1-dt-value">5:00 PM</div>
+      </div>
+    </div>
+
+    <!-- Tagline -->
+    <div class="s1-tagline">We can't wait to celebrate<br>this special day with you!</div>
+
+    <!-- Bottom ornament -->
+    <div class="s1-bot-orn">
+      <span>❮❮</span>
+      <span class="bol">♥</span>
+      <span>❯❯</span>
+    </div>
+
+    <!-- CTA -->
+    <button class="s1-cta" onclick="goTo(2)">
+      <span class="cta-star">✦</span>
+      Open Invitation
+      <span class="cta-star">✦</span>
+    </button>
+
+    <!-- Bottom leaf ornament -->
+    <div class="s1-bot-orn" style="margin-top:10px;margin-bottom:0;">
+      <span>❮❮</span>
+      <span class="bol">♥</span>
+      <span>❯❯</span>
+    </div>
+
   </div>
-  <div class="s1-name">DIVI S KUMAR</div>
-  <div class="s1-sub">is turning One ✦</div>
-  <div class="s1-date">June 13, 2026 &nbsp;·&nbsp; 5:00 PM</div>
-  <div class="gold-divider"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
-  <button class="cta-btn" onclick="goTo(2)">✦ &nbsp; Open Invitation &nbsp; ✦</button>
 </section>
 
 <!-- SCREEN 2 — INVITE CARD -->
@@ -217,7 +422,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
     <div class="one-ring">I</div>
     <div class="card-outro">completing her very first<br>beautiful year on earth</div>
     <div class="gold-divider"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
-    <div class="card-quote">"365 days of love, laughter<br>&amp; little miracles"</div>
+    <div class="card-quote">“365 days of love, laughter<br>&amp; little miracles”</div>
   </div>
   <button class="nav-link" onclick="goTo(3)">View Details &nbsp; →</button>
 </section>
@@ -261,8 +466,8 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   <div class="rsvp-title">Will you join us?</div>
   <div class="rsvp-sub">✦ &nbsp; Kindly respond by June 1st &nbsp; ✦</div>
   <div id="rsvp-choice" style="display:flex;flex-direction:column;align-items:center;">
-    <button class="btn-yes" onclick="showForm()">🎉 &nbsp; Yes, we'll be there!</button>
-    <button class="btn-no"  onclick="declineRSVP()">💌 &nbsp; Sending love, can't make it</button>
+    <button class="btn-yes" onclick="showForm()">🎉 &nbsp; Yes, we’ll be there!</button>
+    <button class="btn-no"  onclick="declineRSVP()">💌 &nbsp; Sending love, can’t make it</button>
   </div>
   <div class="rsvp-form" id="rsvp-form" style="display:none;">
     <div class="f-group">
@@ -299,9 +504,9 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 <!-- SCREEN 5 — SUCCESS -->
 <section class="screen" id="screen5">
   <div class="success-ring" id="success-icon">🎀</div>
-  <div class="success-title" id="success-title">Yay! We can't wait!</div>
+  <div class="success-title" id="success-title">Yay! We can’t wait!</div>
   <div class="success-msg" id="success-msg">
-    Your presence will make Divi's first birthday even more magical. See you on June 13th! ✦
+    Your presence will make Divi’s first birthday even more magical. See you on June 13th! ✦
   </div>
   <div class="gold-divider"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
   <div style="font-size:9px;letter-spacing:4px;color:#c9a84c;text-transform:uppercase;margin-top:18px;">Share the joy</div>
@@ -316,7 +521,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 const API_URL    = 'https://divi-birthday-invite.onrender.com';
 const INVITE_URL = 'https://divi-doll-birthday.netlify.app';
 
-/* ── BABY PHOTO ── */
 document.getElementById('splash-photo').style.backgroundImage = "url('./DIVI_baby.jpeg')";
 
 /* ── BALLOONS ── */
@@ -338,7 +542,6 @@ function makeBalloons() {
     canvas.appendChild(el);
   }
 }
-
 function makeShimmers() {
   const canvas = document.getElementById('balloon-canvas');
   for (let i = 0; i < 14; i++) {
@@ -354,10 +557,7 @@ function makeShimmers() {
 function showSplash(callback) {
   const splash = document.getElementById('splash');
   splash.classList.add('show');
-  setTimeout(() => {
-    splash.classList.remove('show');
-    setTimeout(callback, 480);
-  }, 1400);
+  setTimeout(() => { splash.classList.remove('show'); setTimeout(callback, 480); }, 1400);
 }
 
 /* ── NAVIGATION ── */
@@ -365,15 +565,13 @@ function goTo(n) {
   const current = document.querySelector('.screen.active');
   const target  = document.getElementById('screen' + n);
   if (current === target) return;
-  current.style.opacity = '0';
-  current.style.pointerEvents = 'none';
+  current.style.opacity = '0'; current.style.pointerEvents = 'none';
   setTimeout(() => {
     current.classList.remove('active');
     showSplash(() => {
       target.classList.add('active');
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        target.style.opacity = '1';
-        target.style.pointerEvents = 'all';
+        target.style.opacity = '1'; target.style.pointerEvents = 'all';
       }));
       window.scrollTo({ top: 0, behavior: 'instant' });
       if (n === 5) launchConfetti();
@@ -386,48 +584,24 @@ function showForm() {
   document.getElementById('rsvp-choice').style.display = 'none';
   document.getElementById('rsvp-form').style.display   = 'block';
 }
-
 function declineRSVP() {
-  /* fire-and-forget — don't block navigation */
   sendToAPI({ name: 'Anonymous', attending: false, adults: 0, kids: 0, food: 'none' });
   document.getElementById('success-icon').textContent  = '💌';
-  document.getElementById('success-title').textContent = "We'll miss you!";
+  document.getElementById('success-title').textContent = "We’ll miss you!";
   document.getElementById('success-msg').innerHTML     = "Your warm wishes mean the world to us.<br>Divi sends you lots of love and little blossoms! 🌸";
   goTo(5);
 }
-
 function submitRSVP() {
   const name = document.getElementById('guest-name').value.trim() || 'Dear Family';
-  const btn  = document.getElementById('submit-btn');
-
-  /* Set success state immediately — API runs in background */
   document.getElementById('success-icon').textContent  = '🎀';
-  document.getElementById('success-title').textContent = "Yay! We can't wait!";
-  document.getElementById('success-msg').innerHTML =
-    `So thrilled to celebrate with Dee's family!<br>Divi can't wait to see you on June 13th ✦`;
-
-  /* Fire API without awaiting — no delay for the user */
-  sendToAPI({
-    name,
-    attending : true,
-    adults    : parseInt(document.getElementById('adults').value) || 2,
-    kids      : parseInt(document.getElementById('kids').value)   || 0,
-    food      : document.getElementById('food').value
-  });
-
-  /* Navigate instantly */
+  document.getElementById('success-title').textContent = "Yay! We can’t wait!";
+  document.getElementById('success-msg').innerHTML = `So thrilled to celebrate with Dee’s family!<br>Divi can’t wait to see you on June 13th ✦`;
+  sendToAPI({ name, attending:true, adults:parseInt(document.getElementById('adults').value)||2, kids:parseInt(document.getElementById('kids').value)||0, food:document.getElementById('food').value });
   goTo(5);
 }
-
 function sendToAPI(data) {
-  /* Returns a promise but callers don't need to await it */
-  return fetch(API_URL + '/api/rsvp', {
-    method  : 'POST',
-    headers : { 'Content-Type': 'application/json' },
-    body    : JSON.stringify(data)
-  }).catch(e => console.warn('RSVP API error (non-blocking):', e));
+  return fetch(API_URL + '/api/rsvp', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) }).catch(e => console.warn('RSVP API error:', e));
 }
-
 function resetInvite() {
   document.getElementById('rsvp-choice').style.display = 'flex';
   document.getElementById('rsvp-form').style.display   = 'none';
@@ -444,8 +618,7 @@ function launchConfetti() {
   stage.innerHTML = '';
   const palette = ['#f5c6d0','#e8c97a','#c9a84c','#f9d9b0','#b8707e','#f4b8cc','#fae8b8','#7a3e52','#fde8c8'];
   for (let i = 0; i < 56; i++) {
-    const el = document.createElement('div');
-    el.className = 'cp';
+    const el = document.createElement('div'); el.className = 'cp';
     const sz = 6 + Math.random() * 8;
     const isCirc = Math.random() > 0.45;
     const isThin = !isCirc && Math.random() > 0.5;
@@ -459,10 +632,7 @@ function launchConfetti() {
 function pad(n) { return String(n).padStart(2,'0'); }
 function updateCountdown() {
   const diff = new Date('2026-06-13T17:00:00+05:30') - new Date();
-  if (diff <= 0) {
-    ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00');
-    return;
-  }
+  if (diff <= 0) { ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent='00'); return; }
   document.getElementById('cd-days').textContent  = pad(Math.floor(diff/86400000));
   document.getElementById('cd-hours').textContent = pad(Math.floor((diff%86400000)/3600000));
   document.getElementById('cd-mins').textContent  = pad(Math.floor((diff%3600000)/60000));
@@ -470,9 +640,7 @@ function updateCountdown() {
 }
 
 /* ── SHARE ── */
-function shareWA() {
-  window.open('https://wa.me/?text=' + encodeURIComponent("You're invited to DIVI S KUMAR's 1st Birthday! 🎀✨\n" + INVITE_URL), '_blank');
-}
+function shareWA() { window.open('https://wa.me/?text=' + encodeURIComponent("You're invited to DIVI S KUMAR's 1st Birthday! 🎀✨\n" + INVITE_URL), '_blank'); }
 function copyLink() {
   navigator.clipboard.writeText(INVITE_URL).then(() => {
     const btn = document.getElementById('copy-btn');
@@ -482,10 +650,7 @@ function copyLink() {
 }
 
 /* ── INIT ── */
-makeBalloons();
-makeShimmers();
-updateCountdown();
-setInterval(updateCountdown, 1000);
+makeBalloons(); makeShimmers(); updateCountdown(); setInterval(updateCountdown, 1000);
 document.getElementById('screen1').style.opacity = '1';
 </script>
 </body>
