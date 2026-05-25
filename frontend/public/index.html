@@ -139,6 +139,9 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 @keyframes popBounce { from{transform:scale(0) rotate(-25deg);opacity:0;} to{transform:scale(1) rotate(0deg);opacity:1;} }
 .success-title { font-family:'Cormorant Garamond',serif; font-size:40px; font-weight:300; color:#7a3e52; margin-bottom:12px; }
 .success-msg   { font-family:'Cormorant Garamond',serif; font-size:17px; font-style:italic; color:#8c6060; line-height:1.9; max-width:290px; margin:0 auto 28px; }
+/* highlighted words in decline message */
+.hi-pink  { color: #b8707e; font-style: italic; }
+.hi-gold  { color: #c9a84c; font-style: italic; }
 .share-row { display:flex; gap:12px; justify-content:center; margin-top:12px; }
 .wa-btn { background:rgba(37,211,102,0.12); border:1px solid rgba(37,211,102,0.45); color:#1a6e40; padding:11px 20px; border-radius:30px; font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; }
 .wa-btn:hover { background:rgba(37,211,102,0.2); transform:translateY(-2px); }
@@ -192,8 +195,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   transition: opacity 0.5s ease;
 }
 #photo-reveal.show { opacity: 1; pointer-events: all; }
-
-/* circular frame wraps the blurred-to-clear image */
 .reveal-frame {
   position: relative;
   width: min(82vw, 340px); height: min(82vw, 340px);
@@ -204,8 +205,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   animation: revealPop 0.7s cubic-bezier(0.34,1.56,0.64,1) both;
 }
 @keyframes revealPop { from{transform:scale(0.3) rotate(-15deg);opacity:0;} to{transform:scale(1) rotate(0deg);opacity:1;} }
-
-/* the image starts fully blurred and clears over 1.6 s */
 .reveal-frame img {
   width:100%; height:100%;
   object-fit:cover; object-position:center top;
@@ -218,7 +217,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   60%  { filter: blur(4px)  brightness(0.95); transform: scale(1.03); }
   100% { filter: blur(0px)  brightness(1);    transform: scale(1);    }
 }
-
 .reveal-caption {
   font-family: 'Cormorant Garamond', serif;
   font-size: 22px; font-style: italic;
@@ -409,7 +407,8 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   <div class="success-ring" id="success-icon">🎀</div>
   <div class="success-title" id="success-title">Yay! We can't wait!</div>
   <div class="success-msg" id="success-msg">
-    Your presence will make Divi's first birthday even more magical. See you on June 13th! ✦
+    We are so excited to celebrate with<br>Dee's wonderful family. 🤍<br><br>
+    Divi is thrilled to welcome you on<br><strong style="font-style:normal;color:#7a3e52;">June 13th! ✨</strong>
   </div>
   <div class="gold-divider"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
   <div style="font-size:9px;letter-spacing:4px;color:#c9a84c;text-transform:uppercase;margin-top:18px;">✦ Share the joy ✦</div>
@@ -498,15 +497,23 @@ function declineRSVP() {
   sendToAPI({ name: 'Anonymous', attending: false, adults: 0, kids: 0, food: 'none' });
   document.getElementById('success-icon').textContent  = '💌';
   document.getElementById('success-title').textContent = "We'll miss you!";
-  document.getElementById('success-msg').innerHTML     = "Your kindness and love mean the world to us.<br>Divi is so lucky to have you in her life. 🌸";
+  document.getElementById('success-msg').innerHTML =
+    `Your <span class="hi-pink">kindness</span> and <span class="hi-pink">love</span> mean the world to us.<br>
+    Divi is so lucky to have you in her life.<br><br>
+    🌸<br><br>
+    <em>Though you can't be here,<br>
+    <span class="hi-pink">your love</span> will be with us as we celebrate.</em><br><br>
+    <span style="color:#b8707e;font-style:normal;font-weight:500;">We'll miss you dearly! 💛</span>`;
   goTo(5);
 }
 
 function submitRSVP() {
-  const name = document.getElementById('guest-name').value.trim() || 'Dear Family';
   document.getElementById('success-icon').textContent  = '🎀';
   document.getElementById('success-title').textContent = "Yay! We can't wait!";
-  document.getElementById('success-msg').innerHTML     = `So thrilled to celebrate with Dee's family!<br>Divi can't wait to see you on June 13th ✦`;
+  document.getElementById('success-msg').innerHTML =
+    `We are so excited to celebrate with<br>Dee's wonderful family. 🤍<br><br>
+    Divi is thrilled to welcome you on<br><strong style="font-style:normal;color:#7a3e52;">June 13th! ✨</strong>`;
+  const name = document.getElementById('guest-name').value.trim() || 'Dear Family';
   goTo(5);
   sendToAPI({
     name,
@@ -564,7 +571,6 @@ function handleTapHint(e) {
   }
 }
 
-/* Also attach double-tap anywhere on screen5 for convenience */
 let screen5LastTap = 0;
 document.getElementById('screen5').addEventListener('touchend', function(e) {
   if (e.target.closest('#photo-reveal') || e.target.closest('button') || e.target.closest('.nav-link')) return;
@@ -585,7 +591,6 @@ let revealOpen = false;
 function openReveal() {
   if (revealOpen) return;
   revealOpen = true;
-  /* restart the blur-to-clear animation by cloning the img */
   const frame = document.querySelector('.reveal-frame');
   const oldImg = document.getElementById('reveal-img');
   const newImg = oldImg.cloneNode(true);
