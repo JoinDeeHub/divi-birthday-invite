@@ -92,26 +92,22 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .cd-lbl  { font-size:8px; letter-spacing:2px; color:rgba(232,201,122,0.65); text-transform:uppercase; margin-top:4px; display:block; }
 .cd-sep  { font-family:'Cormorant Garamond',serif; font-size:36px; color:rgba(201,168,76,0.55); line-height:1.05; padding:0 2px; align-self:flex-start; }
 
-/* ── SCREEN 4 ── redesigned to match image */
+/* ── SCREEN 4 ── */
 #screen4 {
   background: #fdf6f0;
   background-image:
     radial-gradient(ellipse at 10% 0%, rgba(245,200,190,0.25) 0%, transparent 50%),
     radial-gradient(ellipse at 90% 100%, rgba(245,200,190,0.2) 0%, transparent 50%);
 }
-/* Crown + ornament */
 .rsvp-crown { font-size: 38px; margin-bottom: 2px; }
 .rsvp-ornament { font-size: 11px; letter-spacing: 6px; color: #c9a84c; margin-bottom: 6px; }
-/* Script headline */
 .rsvp-headline-1 { font-family:'Cormorant Garamond',serif; font-size: clamp(32px,9vw,46px); font-weight:400; color:#7a3e52; line-height:1.1; margin-bottom:0; }
 .rsvp-headline-2 { font-family:'Great Vibes',cursive; font-size: clamp(28px,8vw,40px); color:#b8707e; line-height:1.2; margin-bottom:6px; }
 .rsvp-sub { font-size:9px; letter-spacing:4px; color:#c9a84c; text-transform:uppercase; margin-bottom:26px; }
-/* choice btns unchanged */
 .btn-yes { width:100%; max-width:300px; padding:16px 20px; background:linear-gradient(135deg,#7a3e52,#b8707e); color:#fdf6f0; border:none; border-radius:10px; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; cursor:pointer; box-shadow:0 8px 20px rgba(122,62,82,0.35); transition:all 0.3s; }
 .btn-yes:hover { transform:translateY(-3px); box-shadow:0 12px 36px rgba(122,62,82,0.5); }
 .btn-no  { width:100%; max-width:300px; padding:15px 20px; background:transparent; border:1px solid rgba(122,62,82,0.3); color:#b8707e; border-radius:10px; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; margin-top:8px; }
 .btn-no:hover { background:rgba(122,62,82,0.06); border-color:rgba(122,62,82,0.5); }
-/* Form — pill inputs with left icons */
 .rsvp-form { width:100%; max-width:320px; animation:fadeUp 0.5s ease both; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:translateY(0);} }
 .f-group { margin-bottom:14px; text-align:left; }
@@ -122,7 +118,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .f-pill input, .f-pill select { flex:1; border:none; background:transparent; color:#5c2a3c; font-family:'Montserrat',sans-serif; font-size:13px; outline:none; }
 .f-pill select { -webkit-appearance:none; -moz-appearance:none; appearance:none; cursor:pointer; }
 .f-pill-arrow { font-size:10px; color:#c9a84c; flex-shrink:0; pointer-events:none; }
-/* Gold pill submit button */
 .submit-btn {
   width:100%; padding:16px 20px;
   background: linear-gradient(135deg, #c9a84c 0%, #e8d48a 40%, #d4b05a 70%, #c9a84c 100%);
@@ -150,8 +145,8 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .cp-btn { background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.45); color:#6a4a10; padding:11px 20px; border-radius:30px; font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; }
 .cp-btn:hover { background:rgba(201,168,76,0.22); transform:translateY(-2px); }
 /* Footer credit */
-.site-credit { font-size:9px; letter-spacing:1.5px; color:#c9a84c; opacity:0.7; margin-top:22px; font-family:'Montserrat',sans-serif; }
-.site-credit span { font-style:italic; }
+.site-credit { font-size:9px; letter-spacing:1.5px; color:#b8707e; opacity:0.85; margin-top:28px; font-family:'Montserrat',sans-serif; }
+.site-credit span { font-style:italic; color:#7a3e52; font-weight:500; }
 </style>
 </head>
 <body>
@@ -202,7 +197,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
     <div class="one-ring">I</div>
     <div class="card-outro">completing her very first<br>beautiful year on earth</div>
     <div class="gold-divider"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
-    <div class="card-quote">“365 days of love, laughter<br>&amp; little miracles”</div>
+    <div class="card-quote">"365 days of love, laughter<br>&amp; little miracles"</div>
   </div>
   <button class="nav-link" onclick="goTo(3)">View Details &nbsp; →</button>
 </section>
@@ -227,7 +222,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
     </div>
   </div>
   <div class="cd-box">
-    <div class="cd-eyebrow">✦ &nbsp; Counting down to Divi’s big day &nbsp; ✦</div>
+    <div class="cd-eyebrow">✦ &nbsp; Counting down to Divi's big day &nbsp; ✦</div>
     <div class="cd-row">
       <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-lbl">Days</span></div>
       <div class="cd-sep">:</div>
@@ -241,7 +236,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   <button class="nav-link" onclick="goTo(4)">RSVP Now &nbsp; →</button>
 </section>
 
-<!-- SCREEN 4 — RSVP (redesigned) -->
+<!-- SCREEN 4 — RSVP -->
 <section class="screen" id="screen4">
   <div class="rsvp-crown">👑</div>
   <div class="rsvp-ornament">♥️─────────</div>
@@ -250,8 +245,8 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   <div class="rsvp-sub">✦ &nbsp; Kindly respond by June 1st &nbsp; ✦</div>
 
   <div id="rsvp-choice" style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:320px;">
-    <button class="btn-yes" onclick="showForm()">🎉 &nbsp; Yes, we’ll be there!</button>
-    <button class="btn-no"  onclick="declineRSVP()">💌 &nbsp; Sending love, can’t make it</button>
+    <button class="btn-yes" onclick="showForm()">🎉 &nbsp; Yes, we'll be there!</button>
+    <button class="btn-no"  onclick="declineRSVP()">💌 &nbsp; Sending love, can't make it</button>
   </div>
 
   <div class="rsvp-form" id="rsvp-form" style="display:none;">
@@ -296,7 +291,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
         <span class="f-pill-arrow">▼</span>
       </div>
     </div>
-    <button class="submit-btn" onclick="submitRSVP()">✦ &nbsp; COUNT US IN — WE CAN’T WAIT! &nbsp; ✦</button>
+    <button class="submit-btn" onclick="submitRSVP()">✦ &nbsp; COUNT US IN — WE CAN'T WAIT! &nbsp; ✦</button>
   </div>
   <button class="nav-link" onclick="goTo(3)" style="margin-top:16px;">← Back to Details</button>
 </section>
@@ -304,23 +299,23 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 <!-- SCREEN 5 — SUCCESS -->
 <section class="screen" id="screen5">
   <div class="success-ring" id="success-icon">🎀</div>
-  <div class="success-title" id="success-title">Yay! We can’t wait!</div>
+  <div class="success-title" id="success-title">Yay! We can't wait!</div>
   <div class="success-msg" id="success-msg">
-    Your presence will make Divi’s first birthday even more magical. See you on June 13th! ✦
+    Your presence will make Divi's first birthday even more magical. See you on June 13th! ✦
   </div>
   <div class="gold-divider"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
-  <div style="font-size:9px;letter-spacing:4px;color:#c9a84c;text-transform:uppercase;margin-top:18px;">Share the joy</div>
+  <div style="font-size:9px;letter-spacing:4px;color:#c9a84c;text-transform:uppercase;margin-top:18px;">✦ Share the joy ✦</div>
   <div class="share-row">
     <button class="wa-btn" onclick="shareWA()">📲 &nbsp; WhatsApp</button>
     <button class="cp-btn" onclick="copyLink()" id="copy-btn">🔗 &nbsp; Copy Link</button>
   </div>
   <button class="nav-link" onclick="resetInvite()">← Back to start</button>
-  <div class="site-credit">Crafted with passion — <span>JoinDeeHub</span> by Divi’s Mom</div>
+  <div class="site-credit">Crafted with passion — <span>JoinDeeHub</span> by Divi's Mom</div>
 </section>
 
 <script>
 const API_URL    = 'https://divi-birthday-invite.onrender.com';
-const INVITE_URL = 'https://i-doll-birthday.netlify.app';
+const INVITE_URL = 'https://divi-doll-birthday.pages.dev';
 
 document.getElementById('splash-photo').style.backgroundImage = "url('./DIVI_baby.jpeg')";
 
@@ -394,7 +389,7 @@ function submitRSVP() {
   const name = document.getElementById('guest-name').value.trim() || 'Dear Family';
   document.getElementById('success-icon').textContent  = '🎀';
   document.getElementById('success-title').textContent = "Yay! We can't wait!";
-  document.getElementById('success-msg').innerHTML     = `So thrilled to celebrate with Dee's family!<br>Divi can’t wait to see you on June 13th ✦`;
+  document.getElementById('success-msg').innerHTML     = `So thrilled to celebrate with Dee's family!<br>Divi can't wait to see you on June 13th ✦`;
   goTo(5);
   sendToAPI({
     name,
