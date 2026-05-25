@@ -422,7 +422,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
     <div class="one-ring">I</div>
     <div class="card-outro">completing her very first<br>beautiful year on earth</div>
     <div class="gold-divider"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
-    <div class="card-quote">“365 days of love, laughter<br>&amp; little miracles”</div>
+    <div class="card-quote">"365 days of love, laughter<br>&amp; little miracles"</div>
   </div>
   <button class="nav-link" onclick="goTo(3)">View Details &nbsp; →</button>
 </section>
@@ -466,8 +466,8 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   <div class="rsvp-title">Will you join us?</div>
   <div class="rsvp-sub">✦ &nbsp; Kindly respond by June 1st &nbsp; ✦</div>
   <div id="rsvp-choice" style="display:flex;flex-direction:column;align-items:center;">
-    <button class="btn-yes" onclick="showForm()">🎉 &nbsp; Yes, we’ll be there!</button>
-    <button class="btn-no"  onclick="declineRSVP()">💌 &nbsp; Sending love, can’t make it</button>
+    <button class="btn-yes" onclick="showForm()">🎉 &nbsp; Yes, we'll be there!</button>
+    <button class="btn-no"  onclick="declineRSVP()">💌 &nbsp; Sending love, can't make it</button>
   </div>
   <div class="rsvp-form" id="rsvp-form" style="display:none;">
     <div class="f-group">
@@ -504,9 +504,9 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 <!-- SCREEN 5 — SUCCESS -->
 <section class="screen" id="screen5">
   <div class="success-ring" id="success-icon">🎀</div>
-  <div class="success-title" id="success-title">Yay! We can’t wait!</div>
+  <div class="success-title" id="success-title">Yay! We can't wait!</div>
   <div class="success-msg" id="success-msg">
-    Your presence will make Divi’s first birthday even more magical. See you on June 13th! ✦
+    Your presence will make Divi's first birthday even more magical. See you on June 13th! ✦
   </div>
   <div class="gold-divider"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
   <div style="font-size:9px;letter-spacing:4px;color:#c9a84c;text-transform:uppercase;margin-top:18px;">Share the joy</div>
@@ -519,7 +519,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 
 <script>
 const API_URL    = 'https://divi-birthday-invite.onrender.com';
-const INVITE_URL = 'https://divi-doll-birthday.netlify.app';
+const INVITE_URL = 'https://divi-doll-birthday.pages.dev';
 
 document.getElementById('splash-photo').style.backgroundImage = "url('./DIVI_baby.jpeg')";
 
@@ -587,15 +587,15 @@ function showForm() {
 function declineRSVP() {
   sendToAPI({ name: 'Anonymous', attending: false, adults: 0, kids: 0, food: 'none' });
   document.getElementById('success-icon').textContent  = '💌';
-  document.getElementById('success-title').textContent = "We’ll miss you!";
+  document.getElementById('success-title').textContent = "We'll miss you!";
   document.getElementById('success-msg').innerHTML     = "Your warm wishes mean the world to us.<br>Divi sends you lots of love and little blossoms! 🌸";
   goTo(5);
 }
 function submitRSVP() {
   const name = document.getElementById('guest-name').value.trim() || 'Dear Family';
   document.getElementById('success-icon').textContent  = '🎀';
-  document.getElementById('success-title').textContent = "Yay! We can’t wait!";
-  document.getElementById('success-msg').innerHTML = `So thrilled to celebrate with Dee’s family!<br>Divi can’t wait to see you on June 13th ✦`;
+  document.getElementById('success-title').textContent = "Yay! We can't wait!";
+  document.getElementById('success-msg').innerHTML = `So thrilled to celebrate with Dee's family!<br>Divi can't wait to see you on June 13th ✦`;
   sendToAPI({ name, attending:true, adults:parseInt(document.getElementById('adults').value)||2, kids:parseInt(document.getElementById('kids').value)||0, food:document.getElementById('food').value });
   goTo(5);
 }
