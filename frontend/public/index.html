@@ -41,6 +41,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 
 #splash-photo {
   position: absolute; inset: 0;
+  background-image: url('./DIVI_baby.jpeg');
   background-size: cover; background-position: center center;
   opacity: 0.22; filter: blur(0.5px);
 }
@@ -315,10 +316,8 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 const API_URL    = 'https://divi-birthday-invite.onrender.com';
 const INVITE_URL = 'https://divi-doll-birthday.netlify.app';
 
-/* ── BABY PHOTO — Base64 embedded ── */
-const BABY_IMG = 'BABY_DATA_URI_PLACEHOLDER';
-
-document.getElementById('splash-photo').style.backgroundImage = "url('" + BABY_IMG + "')";
+/* ── BABY PHOTO — loaded from file ── */
+document.getElementById('splash-photo').style.backgroundImage = "url('./DIVI_baby.jpeg')";
 
 /* ── BALLOONS ── */
 const COLORS = ['#f5c6d0','#f9d9b0','#fae8b8','#f4b8cc','#f7e4d4','#e8d0d0','#fde8c8'];
