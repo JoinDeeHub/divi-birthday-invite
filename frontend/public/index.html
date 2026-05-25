@@ -291,7 +291,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
         <option value="both">Both</option>
       </select>
     </div>
-    <button class="submit-btn" id="submit-btn" onclick="submitRSVP()">✦ &nbsp; Confirm Attendance &nbsp; ✦</button>
+    <button class="submit-btn" id="submit-btn" onclick="submitRSVP()">✨ &nbsp; Count me in — See you there! &nbsp; ✨</button>
   </div>
   <button class="nav-link" onclick="goTo(3)" style="margin-top:16px;">← Back to Details</button>
 </section>
@@ -316,7 +316,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 const API_URL    = 'https://divi-birthday-invite.onrender.com';
 const INVITE_URL = 'https://divi-doll-birthday.netlify.app';
 
-/* ── BABY PHOTO — loaded from file ── */
+/* ── BABY PHOTO ── */
 document.getElementById('splash-photo').style.backgroundImage = "url('./DIVI_baby.jpeg')";
 
 /* ── BALLOONS ── */
@@ -388,6 +388,7 @@ function showForm() {
 }
 
 function declineRSVP() {
+  /* fire-and-forget — don't block navigation */
   sendToAPI({ name: 'Anonymous', attending: false, adults: 0, kids: 0, food: 'none' });
   document.getElementById('success-icon').textContent  = '💌';
   document.getElementById('success-title').textContent = "We'll miss you!";
@@ -395,33 +396,36 @@ function declineRSVP() {
   goTo(5);
 }
 
-async function submitRSVP() {
+function submitRSVP() {
   const name = document.getElementById('guest-name').value.trim() || 'Dear Family';
   const btn  = document.getElementById('submit-btn');
-  btn.disabled = true; btn.textContent = 'Sending...';
-  await sendToAPI({
+
+  /* Set success state immediately — API runs in background */
+  document.getElementById('success-icon').textContent  = '🎀';
+  document.getElementById('success-title').textContent = "Yay! We can't wait!";
+  document.getElementById('success-msg').innerHTML =
+    `So thrilled to celebrate with Dee's family!<br>Divi can't wait to see you on June 13th ✦`;
+
+  /* Fire API without awaiting — no delay for the user */
+  sendToAPI({
     name,
     attending : true,
     adults    : parseInt(document.getElementById('adults').value) || 2,
     kids      : parseInt(document.getElementById('kids').value)   || 0,
     food      : document.getElementById('food').value
   });
-  btn.disabled = false; btn.textContent = '✦  Confirm Attendance  ✦';
-  document.getElementById('success-icon').textContent  = '🎀';
-  document.getElementById('success-title').textContent = "Yay! We can't wait!";
-  document.getElementById('success-msg').innerHTML     =
-    `So thrilled to celebrate with Dee's family!<br>Divi can't wait to see you on June 13th ✦`;
+
+  /* Navigate instantly */
   goTo(5);
 }
 
-async function sendToAPI(data) {
-  try {
-    await fetch(API_URL + '/api/rsvp', {
-      method  : 'POST',
-      headers : { 'Content-Type': 'application/json' },
-      body    : JSON.stringify(data)
-    });
-  } catch(e) { console.warn('RSVP API error:', e); }
+function sendToAPI(data) {
+  /* Returns a promise but callers don't need to await it */
+  return fetch(API_URL + '/api/rsvp', {
+    method  : 'POST',
+    headers : { 'Content-Type': 'application/json' },
+    body    : JSON.stringify(data)
+  }).catch(e => console.warn('RSVP API error (non-blocking):', e));
 }
 
 function resetInvite() {
