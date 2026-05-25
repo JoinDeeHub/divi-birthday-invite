@@ -6,7 +6,7 @@
 <title>DIVI S KUMAR – 1st Birthday Invitation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet"/>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { min-height: 100%; }
@@ -14,80 +14,38 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 
 /* ── BALLOON CANVAS ── */
 #balloon-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-
 .balloon { position: absolute; bottom: -160px; display: flex; flex-direction: column; align-items: center; animation: riseUp var(--dur) ease-in-out infinite var(--delay); will-change: transform; }
 @keyframes riseUp {
-  0%   { transform: translateY(0)      translateX(0px)          rotate(0deg);        opacity: 0;    }
-  6%   {                                                                              opacity: 0.9;  }
-  50%  { transform: translateY(-55vh)  translateX(var(--sway))  rotate(var(--lean)); opacity: 0.75; }
-  94%  {                                                                              opacity: 0.3;  }
-  100% { transform: translateY(-115vh) translateX(0px)          rotate(0deg);        opacity: 0;    }
+  0%   { transform: translateY(0) translateX(0px) rotate(0deg); opacity: 0; }
+  6%   { opacity: 0.9; }
+  50%  { transform: translateY(-55vh) translateX(var(--sway)) rotate(var(--lean)); opacity: 0.75; }
+  94%  { opacity: 0.3; }
+  100% { transform: translateY(-115vh) translateX(0px) rotate(0deg); opacity: 0; }
 }
 .b-body  { width: var(--bw); height: calc(var(--bw)*1.26); border-radius: 50% 50% 48% 48%/55% 55% 45% 45%; position: relative; box-shadow: inset -5px -4px 10px rgba(0,0,0,0.08), inset 3px 3px 8px rgba(0,0,0,0.06); }
 .b-shine { position: absolute; top:18%; left:18%; width:30%; height:22%; background:rgba(255,255,255,0.6); border-radius:50%; transform:rotate(-30deg); }
 .b-knot  { width:6px; height:7px; background:inherit; border-radius:0 0 3px 3px; margin-top:-2px; filter:brightness(0.7); }
 .b-string{ width:1px; height:50px; background:linear-gradient(to bottom,rgba(180,140,100,0.45),rgba(180,140,100,0)); margin-top:1px; }
-
 .shimmer-dot { position:absolute; border-radius:50%; background:radial-gradient(circle,rgba(232,201,122,0.7) 0%,transparent 70%); pointer-events:none; animation:shimmerFade var(--sd) ease-in-out infinite var(--sdel); }
 @keyframes shimmerFade { 0%,100%{opacity:0;transform:scale(0.4);} 50%{opacity:0.65;transform:scale(1);} }
 
-/* ── SPLASH OVERLAY ── */
-#splash {
-  position: fixed; inset: 0; z-index: 50;
-  pointer-events: none; opacity: 0;
-  transition: opacity 0.45s ease; overflow: hidden;
-}
+/* ── SPLASH ── */
+#splash { position: fixed; inset: 0; z-index: 50; pointer-events: none; opacity: 0; transition: opacity 0.45s ease; overflow: hidden; }
 #splash.show { opacity: 1; pointer-events: all; }
-
-#splash-photo {
-  position: absolute; inset: 0;
-  background-image: url('./DIVI_baby.jpeg');
-  background-size: cover; background-position: center center;
-  opacity: 0.22; filter: blur(0.5px);
-}
-#splash-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(165deg,rgba(253,246,240,0.70) 0%,rgba(253,238,230,0.62) 50%,rgba(253,246,240,0.70) 100%);
-}
-#splash-text {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 8px;
-}
-.splash-divi {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 64px; font-weight: 300; color: #7a3e52;
-  letter-spacing: 6px; line-height: 1;
-  opacity: 0; transform: translateY(10px);
-  transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
-}
-.splash-sub {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px; font-style: italic; color: #b8866e;
-  letter-spacing: 2px;
-  opacity: 0; transform: translateY(8px);
-  transition: opacity 0.4s ease 0.28s, transform 0.4s ease 0.28s;
-}
+#splash-photo { position: absolute; inset: 0; background-image: url('./DIVI_baby.jpeg'); background-size: cover; background-position: center; opacity: 0.22; filter: blur(0.5px); }
+#splash-overlay { position: absolute; inset: 0; background: linear-gradient(165deg,rgba(253,246,240,0.70) 0%,rgba(253,238,230,0.62) 50%,rgba(253,246,240,0.70) 100%); }
+#splash-text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+.splash-divi { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300; color: #7a3e52; letter-spacing: 6px; line-height: 1; opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s; }
+.splash-sub  { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: #b8866e; letter-spacing: 2px; opacity: 0; transform: translateY(8px); transition: opacity 0.4s ease 0.28s, transform 0.4s ease 0.28s; }
 .splash-star { font-size: 16px; color: #c9a84c; opacity: 0; transition: opacity 0.4s ease 0.4s; }
-#splash.show .splash-divi,
-#splash.show .splash-sub,
-#splash.show .splash-star { opacity: 1; transform: translateY(0); }
+#splash.show .splash-divi, #splash.show .splash-sub, #splash.show .splash-star { opacity: 1; transform: translateY(0); }
 
 /* ── SCREEN SYSTEM ── */
-.screen {
-  position: fixed; inset: 0; z-index: 1;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 40px 20px; text-align: center;
-  overflow-y: auto; opacity: 0; pointer-events: none;
-  transition: opacity 0.5s ease;
-}
+.screen { position: fixed; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
 .screen.active { opacity: 1; pointer-events: all; }
-
 .gold-divider { display:flex; align-items:center; gap:10px; margin:16px auto; width:220px; }
 .g-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,#c9a84c,transparent); }
 .g-diam { width:6px; height:6px; background:#c9a84c; transform:rotate(45deg); flex-shrink:0; }
-
 .eyebrow { font-size:10px; letter-spacing:4px; color:#c9a84c; text-transform:uppercase; margin-bottom:20px; }
 .nav-link { background:transparent; border:none; color:#c9a84c; font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; cursor:pointer; padding:10px 20px; border-bottom:1px solid transparent; transition:all 0.3s; }
 .nav-link:hover { border-bottom-color:#c9a84c; }
@@ -101,7 +59,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .s1-name { font-family:'Cormorant Garamond',serif; font-size:clamp(36px,10vw,50px); font-weight:300; color:#7a3e52; letter-spacing:3px; line-height:1; margin-bottom:6px; white-space:nowrap; }
 .s1-sub  { font-family:'Cormorant Garamond',serif; font-size:19px; font-style:italic; color:#b8866e; letter-spacing:1px; margin-bottom:4px; }
 .s1-date { font-family:'Cormorant Garamond',serif; font-size:14px; color:#c9a84c; letter-spacing:3px; margin-bottom:32px; }
-.cta-btn { background:linear-gradient(135deg,#c9a84c 0%,#e8d080 50%,#c9a84c 100%); background-size:200% 100%; border:none; color:#4a2e0a; padding:15px 48px; font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:4px; text-transform:uppercase; cursor:pointer; border-radius:50px; box-shadow:0 6px 28px rgba(180,140,80,0.4), 0 2px 0 rgba(255,255,255,0.15) inset; transition:all 0.3s; animation:goldGlow 3s ease-in-out infinite; }
+.cta-btn { background:linear-gradient(135deg,#c9a84c 0%,#e8d080 50%,#c9a84c 100%); background-size:200% 100%; border:none; color:#4a2e0a; padding:15px 48px; font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:4px; text-transform:uppercase; cursor:pointer; border-radius:50px; box-shadow:0 6px 28px rgba(180,140,80,0.4); transition:all 0.3s; animation:goldGlow 3s ease-in-out infinite; }
 @keyframes goldGlow { 0%,100%{background-position:0% 50%;box-shadow:0 6px 24px rgba(201,168,76,0.4);} 50%{background-position:100% 50%;box-shadow:0 6px 32px rgba(201,168,76,0.65);} }
 .cta-btn:hover { transform:translateY(-3px); }
 
@@ -111,11 +69,11 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .invite-card::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 15% 10%,rgba(232,201,122,0.13) 0%,transparent 55%),radial-gradient(ellipse at 85% 90%,rgba(232,201,122,0.08) 0%,transparent 60%); pointer-events:none; }
 .invite-card::after { content:'✦'; position:absolute; top:14px; right:18px; font-size:12px; color:rgba(201,168,76,0.4); }
 .card-eyebrow { font-size:9px; letter-spacing:5px; color:#c9a84c; text-transform:uppercase; margin-bottom:16px; }
-.card-intro  { font-family:'Cormorant Garamond',serif; font-size:16px; color:#8c6060; line-height:1.9; margin-bottom:6px; }
-.card-fullname { font-family:'Cormorant Garamond',serif; font-size:44px; font-weight:300; color:#7a3e52; line-height:1; letter-spacing:3px; white-space:nowrap; }
-.one-ring    { width:64px; height:64px; border-radius:50%; border:1.5px solid #c9a84c; background:linear-gradient(135deg,rgba(232,201,122,0.14),rgba(201,168,76,0.04)); margin:14px auto; display:flex; align-items:center; justify-content:center; font-size:32px; color:#7a3e52; }
-.card-outro  { font-family:'Cormorant Garamond',serif; font-size:15px; color:#8c6060; line-height:1.9; }
-.card-quote  { font-family:'Cormorant Garamond',serif; font-size:13px; font-style:italic; color:#b8866e; line-height:1.8; margin-top:6px; }
+.card-intro   { font-family:'Cormorant Garamond',serif; font-size:16px; color:#8c6060; line-height:1.9; margin-bottom:6px; }
+.card-fullname{ font-family:'Cormorant Garamond',serif; font-size:44px; font-weight:300; color:#7a3e52; line-height:1; letter-spacing:3px; white-space:nowrap; }
+.one-ring     { width:64px; height:64px; border-radius:50%; border:1.5px solid #c9a84c; background:linear-gradient(135deg,rgba(232,201,122,0.14),rgba(201,168,76,0.04)); margin:14px auto; display:flex; align-items:center; justify-content:center; font-size:32px; color:#7a3e52; }
+.card-outro   { font-family:'Cormorant Garamond',serif; font-size:15px; color:#8c6060; line-height:1.9; }
+.card-quote   { font-family:'Cormorant Garamond',serif; font-size:13px; font-style:italic; color:#b8866e; line-height:1.8; margin-top:6px; }
 
 /* SCREEN 3 */
 #screen3 { background:#fdf6f0; }
@@ -134,23 +92,48 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .cd-lbl  { font-size:8px; letter-spacing:2px; color:rgba(232,201,122,0.65); text-transform:uppercase; margin-top:4px; display:block; }
 .cd-sep  { font-family:'Cormorant Garamond',serif; font-size:36px; color:rgba(201,168,76,0.55); line-height:1.05; padding:0 2px; align-self:flex-start; }
 
-/* SCREEN 4 */
-#screen4 { background:#fdf6f0; }
-.rsvp-title { font-family:'Cormorant Garamond',serif; font-size:38px; font-weight:300; color:#7a3e52; margin-bottom:6px; }
-.rsvp-sub   { font-size:10px; letter-spacing:3px; color:#c9a84c; text-transform:uppercase; margin-bottom:30px; }
+/* ── SCREEN 4 ── redesigned to match image */
+#screen4 {
+  background: #fdf6f0;
+  background-image:
+    radial-gradient(ellipse at 10% 0%, rgba(245,200,190,0.25) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 100%, rgba(245,200,190,0.2) 0%, transparent 50%);
+}
+/* Crown + ornament */
+.rsvp-crown { font-size: 38px; margin-bottom: 2px; }
+.rsvp-ornament { font-size: 11px; letter-spacing: 6px; color: #c9a84c; margin-bottom: 6px; }
+/* Script headline */
+.rsvp-headline-1 { font-family:'Cormorant Garamond',serif; font-size: clamp(32px,9vw,46px); font-weight:400; color:#7a3e52; line-height:1.1; margin-bottom:0; }
+.rsvp-headline-2 { font-family:'Great Vibes',cursive; font-size: clamp(28px,8vw,40px); color:#b8707e; line-height:1.2; margin-bottom:6px; }
+.rsvp-sub { font-size:9px; letter-spacing:4px; color:#c9a84c; text-transform:uppercase; margin-bottom:26px; }
+/* choice btns unchanged */
 .btn-yes { width:100%; max-width:300px; padding:16px 20px; background:linear-gradient(135deg,#7a3e52,#b8707e); color:#fdf6f0; border:none; border-radius:10px; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; cursor:pointer; box-shadow:0 8px 20px rgba(122,62,82,0.35); transition:all 0.3s; }
 .btn-yes:hover { transform:translateY(-3px); box-shadow:0 12px 36px rgba(122,62,82,0.5); }
 .btn-no  { width:100%; max-width:300px; padding:15px 20px; background:transparent; border:1px solid rgba(122,62,82,0.3); color:#b8707e; border-radius:10px; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; margin-top:8px; }
 .btn-no:hover { background:rgba(122,62,82,0.06); border-color:rgba(122,62,82,0.5); }
-.rsvp-form { width:100%; max-width:300px; animation:fadeUp 0.5s ease both; }
+/* Form — pill inputs with left icons */
+.rsvp-form { width:100%; max-width:320px; animation:fadeUp 0.5s ease both; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:translateY(0);} }
-.f-group  { margin-bottom:16px; text-align:left; }
-.f-label  { font-size:9px; letter-spacing:2.5px; color:#c9a84c; text-transform:uppercase; display:block; margin-bottom:6px; }
-.f-input, .f-select { width:100%; background:#fffaf7; border:1px solid rgba(201,168,76,0.35); border-radius:8px; padding:11px 14px; color:#5c2a3c; font-family:'Montserrat',sans-serif; font-size:13px; transition:all 0.3s; }
-.f-input:focus,.f-select:focus { border-color:#c9a84c; box-shadow:0 0 0 3px rgba(201,168,76,0.14); }
-.f-select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23c9a84c'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center; background-size:16px; padding-right:36px; -webkit-appearance:none; -moz-appearance:none; appearance:none; }
-.submit-btn { width:100%; padding:15px; background:linear-gradient(135deg,#c9a84c 0%,#e8d080 50%,#c9a84c 100%); background-size:200%; color:#4a2e0a; border:none; border-radius:10px; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; cursor:pointer; box-shadow:0 6px 18px rgba(201,168,76,0.3); transition:all 0.3s; animation:goldGlow 3s ease-in-out infinite; }
-.submit-btn:hover { transform:translateY(-2px); }
+.f-group { margin-bottom:14px; text-align:left; }
+.f-label { font-size:8px; letter-spacing:2.5px; color:#c9a84c; text-transform:uppercase; display:block; margin-bottom:5px; font-weight:500; }
+.f-pill  { display:flex; align-items:center; background:#fff; border:1px solid rgba(201,168,76,0.4); border-radius:50px; padding:0 16px; height:52px; gap:10px; transition:all 0.3s; box-shadow:0 2px 8px rgba(122,62,82,0.06); }
+.f-pill:focus-within { border-color:#c9a84c; box-shadow:0 0 0 3px rgba(201,168,76,0.12); }
+.f-pill-icon { font-size:17px; flex-shrink:0; opacity:0.75; }
+.f-pill input, .f-pill select { flex:1; border:none; background:transparent; color:#5c2a3c; font-family:'Montserrat',sans-serif; font-size:13px; outline:none; }
+.f-pill select { -webkit-appearance:none; -moz-appearance:none; appearance:none; cursor:pointer; }
+.f-pill-arrow { font-size:10px; color:#c9a84c; flex-shrink:0; pointer-events:none; }
+/* Gold pill submit button */
+.submit-btn {
+  width:100%; padding:16px 20px;
+  background: linear-gradient(135deg, #c9a84c 0%, #e8d48a 40%, #d4b05a 70%, #c9a84c 100%);
+  background-size:200%;
+  color:#4a2e0a; border:none; border-radius:50px;
+  font-family:'Montserrat',sans-serif; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase;
+  cursor:pointer;
+  box-shadow:0 6px 22px rgba(201,168,76,0.45), 0 2px 0 rgba(255,255,255,0.2) inset;
+  transition:all 0.3s; animation:goldGlow 3s ease-in-out infinite; margin-top:4px;
+}
+.submit-btn:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(201,168,76,0.55); }
 
 /* SCREEN 5 */
 #screen5 { background:linear-gradient(165deg,#fdf6f0 0%,#fdeee6 50%,#fdf6f0 100%); }
@@ -166,6 +149,9 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .wa-btn:hover { background:rgba(37,211,102,0.2); transform:translateY(-2px); }
 .cp-btn { background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.45); color:#6a4a10; padding:11px 20px; border-radius:30px; font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; }
 .cp-btn:hover { background:rgba(201,168,76,0.22); transform:translateY(-2px); }
+/* Footer credit */
+.site-credit { font-size:9px; letter-spacing:1.5px; color:#c9a84c; opacity:0.7; margin-top:22px; font-family:'Montserrat',sans-serif; }
+.site-credit span { font-style:italic; }
 </style>
 </head>
 <body>
@@ -216,7 +202,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
     <div class="one-ring">I</div>
     <div class="card-outro">completing her very first<br>beautiful year on earth</div>
     <div class="gold-divider"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
-    <div class="card-quote">"365 days of love, laughter<br>&amp; little miracles"</div>
+    <div class="card-quote">“365 days of love, laughter<br>&amp; little miracles”</div>
   </div>
   <button class="nav-link" onclick="goTo(3)">View Details &nbsp; →</button>
 </section>
@@ -241,7 +227,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
     </div>
   </div>
   <div class="cd-box">
-    <div class="cd-eyebrow">✦ &nbsp; Counting down to Divi's big day &nbsp; ✦</div>
+    <div class="cd-eyebrow">✦ &nbsp; Counting down to Divi’s big day &nbsp; ✦</div>
     <div class="cd-row">
       <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-lbl">Days</span></div>
       <div class="cd-sep">:</div>
@@ -255,42 +241,62 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   <button class="nav-link" onclick="goTo(4)">RSVP Now &nbsp; →</button>
 </section>
 
-<!-- SCREEN 4 — RSVP -->
+<!-- SCREEN 4 — RSVP (redesigned) -->
 <section class="screen" id="screen4">
-  <div class="rsvp-title">Will you join us?</div>
+  <div class="rsvp-crown">👑</div>
+  <div class="rsvp-ornament">♥️─────────</div>
+  <div class="rsvp-headline-1">We would love</div>
+  <div class="rsvp-headline-2">to celebrate with you!</div>
   <div class="rsvp-sub">✦ &nbsp; Kindly respond by June 1st &nbsp; ✦</div>
-  <div id="rsvp-choice" style="display:flex;flex-direction:column;align-items:center;">
-    <button class="btn-yes" onclick="showForm()">🎉 &nbsp; Yes, we'll be there!</button>
-    <button class="btn-no"  onclick="declineRSVP()">💌 &nbsp; Sending love, can't make it</button>
+
+  <div id="rsvp-choice" style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:320px;">
+    <button class="btn-yes" onclick="showForm()">🎉 &nbsp; Yes, we’ll be there!</button>
+    <button class="btn-no"  onclick="declineRSVP()">💌 &nbsp; Sending love, can’t make it</button>
   </div>
+
   <div class="rsvp-form" id="rsvp-form" style="display:none;">
     <div class="f-group">
-      <label class="f-label" for="guest-name">Your Name / Family</label>
-      <input class="f-input" type="text" id="guest-name" placeholder="e.g. KOTTILINGAL Family…" autocomplete="name"/>
+      <label class="f-label">Your Name / Family</label>
+      <div class="f-pill">
+        <span class="f-pill-icon">👤</span>
+        <input type="text" id="guest-name" placeholder="e.g. KOTTILINGAL Family…" autocomplete="name"/>
+      </div>
     </div>
     <div class="f-group">
-      <label class="f-label" for="adults">Adults Attending</label>
-      <select class="f-select" id="adults">
-        <option value="1">1</option><option value="2" selected>2</option>
-        <option value="3">3</option><option value="4">4</option><option value="5+">5 or more</option>
-      </select>
+      <label class="f-label">Adults Attending</label>
+      <div class="f-pill">
+        <span class="f-pill-icon">👥</span>
+        <select id="adults">
+          <option value="1">1</option><option value="2" selected>2</option>
+          <option value="3">3</option><option value="4">4</option><option value="5+">5 or more</option>
+        </select>
+        <span class="f-pill-arrow">▼</span>
+      </div>
     </div>
     <div class="f-group">
-      <label class="f-label" for="kids">Children Joining</label>
-      <select class="f-select" id="kids">
-        <option value="0" selected>None</option><option value="1">1</option>
-        <option value="2">2</option><option value="3+">3 or more</option>
-      </select>
+      <label class="f-label">Children Joining</label>
+      <div class="f-pill">
+        <span class="f-pill-icon">👶</span>
+        <select id="kids">
+          <option value="0" selected>None</option><option value="1">1</option>
+          <option value="2">2</option><option value="3+">3 or more</option>
+        </select>
+        <span class="f-pill-arrow">▼</span>
+      </div>
     </div>
     <div class="f-group">
-      <label class="f-label" for="food">Food Preference</label>
-      <select class="f-select" id="food">
-        <option value="veg">Vegetarian</option>
-        <option value="nonveg">Non-Vegetarian</option>
-        <option value="both">Both</option>
-      </select>
+      <label class="f-label">Food Preference</label>
+      <div class="f-pill">
+        <span class="f-pill-icon">🌿</span>
+        <select id="food">
+          <option value="veg">Vegetarian</option>
+          <option value="nonveg">Non-Vegetarian</option>
+          <option value="both">Both</option>
+        </select>
+        <span class="f-pill-arrow">▼</span>
+      </div>
     </div>
-    <button class="submit-btn" id="submit-btn" onclick="submitRSVP()">✦ &nbsp; Confirm Attendance &nbsp; ✦</button>
+    <button class="submit-btn" onclick="submitRSVP()">✦ &nbsp; COUNT US IN — WE CAN’T WAIT! &nbsp; ✦</button>
   </div>
   <button class="nav-link" onclick="goTo(3)" style="margin-top:16px;">← Back to Details</button>
 </section>
@@ -298,9 +304,9 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 <!-- SCREEN 5 — SUCCESS -->
 <section class="screen" id="screen5">
   <div class="success-ring" id="success-icon">🎀</div>
-  <div class="success-title" id="success-title">Yay! We can't wait!</div>
+  <div class="success-title" id="success-title">Yay! We can’t wait!</div>
   <div class="success-msg" id="success-msg">
-    Your presence will make Divi's first birthday even more magical. See you on June 13th! ✦
+    Your presence will make Divi’s first birthday even more magical. See you on June 13th! ✦
   </div>
   <div class="gold-divider"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
   <div style="font-size:9px;letter-spacing:4px;color:#c9a84c;text-transform:uppercase;margin-top:18px;">Share the joy</div>
@@ -309,16 +315,15 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
     <button class="cp-btn" onclick="copyLink()" id="copy-btn">🔗 &nbsp; Copy Link</button>
   </div>
   <button class="nav-link" onclick="resetInvite()">← Back to start</button>
+  <div class="site-credit">Crafted with passion — <span>JoinDeeHub</span> by Divi’s Mom</div>
 </section>
 
 <script>
 const API_URL    = 'https://divi-birthday-invite.onrender.com';
-const INVITE_URL = 'https://divi-doll-birthday.pages.dev';
+const INVITE_URL = 'https://i-doll-birthday.netlify.app';
 
-/* ── BABY PHOTO ── */
 document.getElementById('splash-photo').style.backgroundImage = "url('./DIVI_baby.jpeg')";
 
-/* ── BALLOONS ── */
 const COLORS = ['#f5c6d0','#f9d9b0','#fae8b8','#f4b8cc','#f7e4d4','#e8d0d0','#fde8c8'];
 function makeBalloons() {
   const canvas = document.getElementById('balloon-canvas');
@@ -337,7 +342,6 @@ function makeBalloons() {
     canvas.appendChild(el);
   }
 }
-
 function makeShimmers() {
   const canvas = document.getElementById('balloon-canvas');
   for (let i = 0; i < 14; i++) {
@@ -349,30 +353,23 @@ function makeShimmers() {
   }
 }
 
-/* ── SPLASH ── */
 function showSplash(callback) {
   const splash = document.getElementById('splash');
   splash.classList.add('show');
-  setTimeout(() => {
-    splash.classList.remove('show');
-    setTimeout(callback, 480);
-  }, 1400);
+  setTimeout(() => { splash.classList.remove('show'); setTimeout(callback, 480); }, 1400);
 }
 
-/* ── NAVIGATION ── */
 function goTo(n) {
   const current = document.querySelector('.screen.active');
   const target  = document.getElementById('screen' + n);
   if (current === target) return;
-  current.style.opacity = '0';
-  current.style.pointerEvents = 'none';
+  current.style.opacity = '0'; current.style.pointerEvents = 'none';
   setTimeout(() => {
     current.classList.remove('active');
     showSplash(() => {
       target.classList.add('active');
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        target.style.opacity = '1';
-        target.style.pointerEvents = 'all';
+        target.style.opacity = '1'; target.style.pointerEvents = 'all';
       }));
       window.scrollTo({ top: 0, behavior: 'instant' });
       if (n === 5) launchConfetti();
@@ -380,14 +377,12 @@ function goTo(n) {
   }, 400);
 }
 
-/* ── RSVP ── */
 function showForm() {
   document.getElementById('rsvp-choice').style.display = 'none';
   document.getElementById('rsvp-form').style.display   = 'block';
 }
 
 function declineRSVP() {
-  // Fire-and-forget — don't await
   sendToAPI({ name: 'Anonymous', attending: false, adults: 0, kids: 0, food: 'none' });
   document.getElementById('success-icon').textContent  = '💌';
   document.getElementById('success-title').textContent = "We'll miss you!";
@@ -397,17 +392,10 @@ function declineRSVP() {
 
 function submitRSVP() {
   const name = document.getElementById('guest-name').value.trim() || 'Dear Family';
-
-  // ✅ Set success screen content FIRST
   document.getElementById('success-icon').textContent  = '🎀';
   document.getElementById('success-title').textContent = "Yay! We can't wait!";
-  document.getElementById('success-msg').innerHTML     =
-    `So thrilled to celebrate with Dee's family!<br>Divi can't wait to see you on June 13th ✦`;
-
-  // ✅ Navigate IMMEDIATELY — no waiting for API
+  document.getElementById('success-msg').innerHTML     = `So thrilled to celebrate with Dee's family!<br>Divi can’t wait to see you on June 13th ✦`;
   goTo(5);
-
-  // ✅ Fire API in background — does not block UI at all
   sendToAPI({
     name,
     attending : true,
@@ -418,7 +406,6 @@ function submitRSVP() {
 }
 
 function sendToAPI(data) {
-  // Non-blocking — returns promise but never awaited
   return fetch(API_URL + '/api/rsvp', {
     method  : 'POST',
     headers : { 'Content-Type': 'application/json' },
@@ -436,7 +423,6 @@ function resetInvite() {
   goTo(1);
 }
 
-/* ── CONFETTI ── */
 function launchConfetti() {
   const stage = document.getElementById('confetti-stage');
   stage.innerHTML = '';
@@ -453,21 +439,16 @@ function launchConfetti() {
   setTimeout(() => { stage.innerHTML = ''; }, 3500);
 }
 
-/* ── COUNTDOWN ── */
 function pad(n) { return String(n).padStart(2,'0'); }
 function updateCountdown() {
   const diff = new Date('2026-06-13T17:00:00+05:30') - new Date();
-  if (diff <= 0) {
-    ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00');
-    return;
-  }
+  if (diff <= 0) { ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00'); return; }
   document.getElementById('cd-days').textContent  = pad(Math.floor(diff/86400000));
   document.getElementById('cd-hours').textContent = pad(Math.floor((diff%86400000)/3600000));
   document.getElementById('cd-mins').textContent  = pad(Math.floor((diff%3600000)/60000));
   document.getElementById('cd-secs').textContent  = pad(Math.floor((diff%60000)/1000));
 }
 
-/* ── SHARE ── */
 function shareWA() {
   window.open('https://wa.me/?text=' + encodeURIComponent("You're invited to DIVI S KUMAR's 1st Birthday! 🎀✨\n" + INVITE_URL), '_blank');
 }
@@ -479,7 +460,6 @@ function copyLink() {
   });
 }
 
-/* ── INIT ── */
 makeBalloons();
 makeShimmers();
 updateCountdown();
