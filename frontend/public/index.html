@@ -11,10 +11,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { min-height: 100%; }
 body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: hidden; }
-
-/* ── BALLOON CANVAS (always fixed behind everything) ── */
 #balloon-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-
 .balloon { position: absolute; bottom: -160px; display: flex; flex-direction: column; align-items: center; animation: riseUp var(--dur) ease-in-out infinite var(--delay); will-change: transform; }
 @keyframes riseUp {
   0%   { transform: translateY(0)     translateX(0px)           rotate(0deg);        opacity: 0;    }
@@ -27,101 +24,25 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .b-shine { position: absolute; top:18%; left:18%; width:30%; height:22%; background:rgba(255,255,255,0.6); border-radius:50%; transform:rotate(-30deg); }
 .b-knot  { width:6px; height:7px; background:inherit; border-radius:0 0 3px 3px; margin-top:-2px; filter:brightness(0.7); }
 .b-string{ width:1px; height:50px; background:linear-gradient(to bottom,rgba(180,140,100,0.45),rgba(180,140,100,0)); margin-top:1px; }
-
 .shimmer-dot { position:absolute; border-radius:50%; background:radial-gradient(circle,rgba(232,201,122,0.7) 0%,transparent 70%); pointer-events:none; animation:shimmerFade var(--sd) ease-in-out infinite var(--sdel); }
 @keyframes shimmerFade { 0%,100%{opacity:0;transform:scale(0.4);} 50%{opacity:0.7;transform:scale(1);} }
-
-/* ── TRANSITION SPLASH OVERLAY ── */
-#splash {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.45s ease;
-  overflow: hidden;
-}
+#splash { position: fixed; inset: 0; z-index: 50; pointer-events: none; opacity: 0; transition: opacity 0.45s ease; overflow: hidden; }
 #splash.show { opacity: 1; pointer-events: all; }
-
-#splash-photo {
-  position: absolute;
-  inset: 0;
-  background: url('IMG_9869.jpg') center center / cover no-repeat;
-  opacity: 0.22;
-  filter: blur(1px);
-}
-#splash-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(165deg,rgba(253,246,240,0.72) 0%,rgba(253,238,230,0.65) 50%,rgba(253,246,240,0.72) 100%);
-}
-#splash-text {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-.splash-divi {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 64px;
-  font-weight: 300;
-  color: #7a3e52;
-  letter-spacing: 6px;
-  line-height: 1;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
-}
-.splash-sub {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
-  font-style: italic;
-  color: #b8866e;
-  letter-spacing: 2px;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.4s ease 0.28s, transform 0.4s ease 0.28s;
-}
-.splash-star {
-  font-size: 16px;
-  color: #c9a84c;
-  opacity: 0;
-  transition: opacity 0.4s ease 0.4s;
-}
-#splash.show .splash-divi,
-#splash.show .splash-sub,
-#splash.show .splash-star { opacity: 1; transform: translateY(0); }
-
-/* ── SCREEN SYSTEM ── */
-.screen {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-  text-align: center;
-  overflow-y: auto;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-}
+#splash-photo { position: absolute; inset: 0; background-size: cover; background-position: center center; opacity: 0.25; filter: blur(0.5px); }
+#splash-overlay { position: absolute; inset: 0; background: linear-gradient(165deg,rgba(253,246,240,0.68) 0%,rgba(253,238,230,0.60) 50%,rgba(253,246,240,0.68) 100%); }
+#splash-text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+.splash-divi { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300; color: #7a3e52; letter-spacing: 6px; line-height: 1; opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s; }
+.splash-sub { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: #b8866e; letter-spacing: 2px; opacity: 0; transform: translateY(8px); transition: opacity 0.4s ease 0.28s, transform 0.4s ease 0.28s; }
+.splash-star { font-size: 16px; color: #c9a84c; opacity: 0; transition: opacity 0.4s ease 0.4s; }
+#splash.show .splash-divi, #splash.show .splash-sub, #splash.show .splash-star { opacity: 1; transform: translateY(0); }
+.screen { position: fixed; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
 .screen.active { opacity: 1; pointer-events: all; }
-
 .gold-divider { display:flex; align-items:center; gap:10px; margin:16px auto; width:220px; }
 .g-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,#c9a84c,transparent); }
 .g-diam { width:6px; height:6px; background:#c9a84c; transform:rotate(45deg); flex-shrink:0; }
-
 .eyebrow { font-size:10px; letter-spacing:4px; color:#c9a84c; text-transform:uppercase; margin-bottom:20px; }
 .nav-link { background:transparent; border:none; color:#c9a84c; font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; cursor:pointer; padding:10px 20px; margin-top:24px; border-bottom:1px solid transparent; transition:border-color 0.25s; }
 .nav-link:hover { border-bottom-color:#c9a84c; }
-
-/* SCREEN 1 */
 #screen1 { background:linear-gradient(165deg,#fdf6f0 0%,#fdeee6 50%,#fdf6f0 100%); }
 .s1-tag { font-size:10px; letter-spacing:5px; color:#b8866e; text-transform:uppercase; margin-bottom:32px; }
 .env-wrap { cursor:pointer; margin-bottom:36px; animation:envFloat 3.5s ease-in-out infinite; transition:transform 0.2s; }
@@ -134,8 +55,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .cta-btn { background:linear-gradient(135deg,#c9a84c 0%,#e8d080 50%,#c9a84c 100%); background-size:200% 100%; border:none; color:#4a2e0a; padding:15px 48px; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:500; letter-spacing:4px; text-transform:uppercase; cursor:pointer; border-radius:50px; box-shadow:0 6px 24px rgba(201,168,76,0.45); transition:all 0.3s; animation:goldGlow 3s ease-in-out infinite; }
 @keyframes goldGlow { 0%,100%{background-position:0% 50%;box-shadow:0 6px 24px rgba(201,168,76,0.4);} 50%{background-position:100% 50%;box-shadow:0 6px 32px rgba(201,168,76,0.65);} }
 .cta-btn:hover { transform:translateY(-3px); }
-
-/* SCREEN 2 */
 #screen2 { background:#fdf6f0; }
 .invite-card { background:#fffaf7; border:1px solid rgba(201,168,76,0.35); border-radius:20px; padding:36px 28px; width:100%; max-width:360px; box-shadow:0 1px 0 rgba(201,168,76,0.3) inset,0 12px 48px rgba(180,140,110,0.18); position:relative; overflow:hidden; }
 .invite-card::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 15% 10%,rgba(232,201,122,0.13) 0%,transparent 55%),radial-gradient(ellipse at 85% 90%,rgba(232,158,158,0.10) 0%,transparent 55%); pointer-events:none; }
@@ -147,8 +66,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .one-ring    { width:64px; height:64px; border-radius:50%; border:1.5px solid #c9a84c; background:linear-gradient(135deg,rgba(232,201,122,0.14),rgba(201,168,76,0.04)); margin:14px auto; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:32px; font-style:italic; color:#c9a84c; box-shadow:0 0 0 8px rgba(201,168,76,0.07),0 4px 20px rgba(201,168,76,0.15); }
 .card-outro  { font-family:'Cormorant Garamond',serif; font-size:15px; color:#8c6060; line-height:1.9; }
 .card-quote  { font-family:'Cormorant Garamond',serif; font-size:13px; font-style:italic; color:#b8866e; line-height:1.8; margin-top:6px; }
-
-/* SCREEN 3 */
 #screen3 { background:#fdf6f0; }
 .detail-card { background:#fffaf7; border:1px solid rgba(201,168,76,0.25); border-radius:14px; padding:16px 20px; width:100%; max-width:340px; margin-bottom:12px; display:flex; align-items:center; gap:16px; text-align:left; box-shadow:0 2px 16px rgba(180,140,110,0.1); transition:box-shadow 0.25s,transform 0.25s; }
 .detail-card:hover { box-shadow:0 6px 24px rgba(180,140,110,0.18); transform:translateY(-2px); }
@@ -164,8 +81,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .cd-num  { font-family:'Cormorant Garamond',serif; font-size:40px; font-weight:300; color:#fdf6f0; line-height:1; display:block; min-width:2ch; text-align:center; }
 .cd-lbl  { font-size:8px; letter-spacing:2px; color:rgba(232,201,122,0.65); text-transform:uppercase; margin-top:4px; display:block; }
 .cd-sep  { font-family:'Cormorant Garamond',serif; font-size:36px; color:rgba(201,168,76,0.55); line-height:1.05; padding:0 2px; align-self:flex-start; }
-
-/* SCREEN 4 */
 #screen4 { background:#fdf6f0; }
 .rsvp-title { font-family:'Cormorant Garamond',serif; font-size:38px; font-weight:300; color:#7a3e52; margin-bottom:6px; }
 .rsvp-sub   { font-size:10px; letter-spacing:3px; color:#c9a84c; text-transform:uppercase; margin-bottom:30px; }
@@ -183,8 +98,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .submit-btn { width:100%; padding:15px; background:linear-gradient(135deg,#c9a84c 0%,#e8d080 50%,#c9a84c 100%); background-size:200%; color:#4a2e0a; border:none; border-radius:10px; font-family:'Montserrat',sans-serif; font-size:10px; font-weight:500; letter-spacing:4px; text-transform:uppercase; cursor:pointer; box-shadow:0 6px 24px rgba(201,168,76,0.4); transition:all 0.3s; margin-top:6px; animation:goldGlow 3s ease infinite; }
 .submit-btn:hover { transform:translateY(-2px); }
 .submit-btn:disabled { opacity:0.6; cursor:not-allowed; }
-
-/* SCREEN 5 */
 #screen5 { background:linear-gradient(165deg,#fdf6f0 0%,#fdeee6 50%,#fdf6f0 100%); }
 #confetti-stage { position:fixed; inset:0; pointer-events:none; z-index:99; overflow:hidden; }
 .cp { position:absolute; top:-20px; animation:cpFall var(--d) ease-in forwards var(--dl); }
@@ -201,11 +114,8 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 </style>
 </head>
 <body>
-
 <div id="balloon-canvas"></div>
 <div id="confetti-stage"></div>
-
-<!-- TRANSITION SPLASH -->
 <div id="splash">
   <div id="splash-photo"></div>
   <div id="splash-overlay"></div>
@@ -215,8 +125,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
     <div class="splash-star">✦ &nbsp; ✦ &nbsp; ✦</div>
   </div>
 </div>
-
-<!-- SCREEN 1 — LANDING -->
 <section class="screen active" id="screen1">
   <div class="s1-tag">A First Birthday Celebration</div>
   <div class="env-wrap" onclick="goTo(2)" role="button" aria-label="Open invitation">
@@ -237,8 +145,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   <div class="gold-divider"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
   <button class="cta-btn" onclick="goTo(2)">✦ &nbsp; Open Invitation &nbsp; ✦</button>
 </section>
-
-<!-- SCREEN 2 — INVITE CARD -->
 <section class="screen" id="screen2">
   <div class="invite-card">
     <div class="card-eyebrow">✦ &nbsp; You are cordially invited &nbsp; ✦</div>
@@ -253,8 +159,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   </div>
   <button class="nav-link" onclick="goTo(3)">View Details &nbsp; →</button>
 </section>
-
-<!-- SCREEN 3 — DETAILS & COUNTDOWN -->
 <section class="screen" id="screen3">
   <div class="eyebrow">✦ &nbsp; Celebration Details &nbsp; ✦</div>
   <div class="detail-card">
@@ -287,8 +191,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   </div>
   <button class="nav-link" onclick="goTo(4)">RSVP Now &nbsp; →</button>
 </section>
-
-<!-- SCREEN 4 — RSVP -->
 <section class="screen" id="screen4">
   <div class="rsvp-title">Will you join us?</div>
   <div class="rsvp-sub">✦ &nbsp; Kindly respond by June 1st &nbsp; ✦</div>
@@ -327,8 +229,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   </div>
   <button class="nav-link" onclick="goTo(3)" style="margin-top:16px;">← Back to Details</button>
 </section>
-
-<!-- SCREEN 5 — SUCCESS -->
 <section class="screen" id="screen5">
   <div class="success-ring" id="success-icon">🎀</div>
   <div class="success-title" id="success-title">Yay! We can't wait!</div>
@@ -343,12 +243,14 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   </div>
   <button class="nav-link" onclick="resetInvite()">← Back to start</button>
 </section>
-
 <script>
 const API_URL    = 'https://divi-birthday-invite.onrender.com';
 const INVITE_URL = 'https://divi-doll-birthday.netlify.app';
+const BABY_IMG   = 'PLACEHOLDER_BASE64';
 
-/* ── BALLOONS ── */
+/* inject baby photo into splash */
+document.getElementById('splash-photo').style.backgroundImage = "url('" + BABY_IMG + "')";
+
 const COLORS = ['#f5c6d0','#f9d9b0','#fae8b8','#f4b8cc','#f7e4d4','#e8d0d0','#fde8c8'];
 function makeBalloons() {
   const canvas = document.getElementById('balloon-canvas');
@@ -367,7 +269,6 @@ function makeBalloons() {
     canvas.appendChild(el);
   }
 }
-
 function makeShimmers() {
   const canvas = document.getElementById('balloon-canvas');
   for (let i = 0; i < 14; i++) {
@@ -378,34 +279,19 @@ function makeShimmers() {
     canvas.appendChild(s);
   }
 }
-
-/* ── SPLASH TRANSITION ── */
-let splashTimer = null;
 function showSplash(callback) {
   const splash = document.getElementById('splash');
-  // fade in splash
   splash.classList.add('show');
-  // hold for 1.4s then fade out and run callback
-  splashTimer = setTimeout(() => {
-    splash.classList.remove('show');
-    setTimeout(callback, 480); // wait for fade-out
-  }, 1400);
+  setTimeout(() => { splash.classList.remove('show'); setTimeout(callback, 480); }, 1500);
 }
-
-/* ── NAVIGATION ── */
 function goTo(n) {
   const current = document.querySelector('.screen.active');
   const target  = document.getElementById('screen' + n);
   if (current === target) return;
-
-  // Fade out current screen
   current.style.opacity = '0';
   current.style.pointerEvents = 'none';
-
   setTimeout(() => {
     current.classList.remove('active');
-
-    // Show Divi splash in between
     showSplash(() => {
       target.classList.add('active');
       requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -417,13 +303,10 @@ function goTo(n) {
     });
   }, 400);
 }
-
-/* ── RSVP ── */
 function showForm() {
   document.getElementById('rsvp-choice').style.display = 'none';
   document.getElementById('rsvp-form').style.display   = 'block';
 }
-
 function declineRSVP() {
   sendToAPI({ name: 'Anonymous', attending: false, adults: 0, kids: 0, food: 'none' });
   document.getElementById('success-icon').textContent  = '💌';
@@ -431,36 +314,20 @@ function declineRSVP() {
   document.getElementById('success-msg').innerHTML     = "Your warm wishes mean the world to us.<br>Divi sends you lots of love and little blossoms! 🌸";
   goTo(5);
 }
-
 async function submitRSVP() {
   const name = document.getElementById('guest-name').value.trim() || 'Dear Family';
   const btn  = document.getElementById('submit-btn');
   btn.disabled = true; btn.textContent = 'Sending...';
-  await sendToAPI({
-    name,
-    attending : true,
-    adults    : parseInt(document.getElementById('adults').value) || 2,
-    kids      : parseInt(document.getElementById('kids').value)   || 0,
-    food      : document.getElementById('food').value
-  });
+  await sendToAPI({ name, attending: true, adults: parseInt(document.getElementById('adults').value)||2, kids: parseInt(document.getElementById('kids').value)||0, food: document.getElementById('food').value });
   btn.disabled = false; btn.textContent = '✦  Confirm Attendance  ✦';
   document.getElementById('success-icon').textContent  = '🎀';
   document.getElementById('success-title').textContent = "Yay! We can't wait!";
-  document.getElementById('success-msg').innerHTML     =
-    `So thrilled to celebrate with ${name}'s family!<br>Divi can't wait to see you on June 13th ✦`;
+  document.getElementById('success-msg').innerHTML     = `So thrilled to celebrate with ${name}'s family!<br>Divi can't wait to see you on June 13th ✦`;
   goTo(5);
 }
-
 async function sendToAPI(data) {
-  try {
-    await fetch(API_URL + '/api/rsvp', {
-      method  : 'POST',
-      headers : { 'Content-Type': 'application/json' },
-      body    : JSON.stringify(data)
-    });
-  } catch(e) { console.warn('RSVP API error (continuing):', e); }
+  try { await fetch(API_URL + '/api/rsvp', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) }); } catch(e) { console.warn('RSVP API error:', e); }
 }
-
 function resetInvite() {
   document.getElementById('rsvp-choice').style.display = 'flex';
   document.getElementById('rsvp-form').style.display   = 'none';
@@ -470,62 +337,39 @@ function resetInvite() {
   document.getElementById('food').value   = 'veg';
   goTo(1);
 }
-
-/* ── CONFETTI ── */
 function launchConfetti() {
-  const stage   = document.getElementById('confetti-stage');
+  const stage = document.getElementById('confetti-stage');
   stage.innerHTML = '';
   const palette = ['#f5c6d0','#e8c97a','#c9a84c','#f9d9b0','#b8707e','#f4b8cc','#fae8b8','#7a3e52','#fde8c8'];
   for (let i = 0; i < 56; i++) {
-    const el = document.createElement('div');
-    el.className = 'cp';
-    const sz = 6 + Math.random() * 8;
-    const isCirc = Math.random() > 0.45;
-    const isThin = !isCirc && Math.random() > 0.5;
+    const el = document.createElement('div'); el.className = 'cp';
+    const sz = 6 + Math.random() * 8; const isCirc = Math.random() > 0.45; const isThin = !isCirc && Math.random() > 0.5;
     el.style.cssText = `left:${Math.random()*100}%;width:${sz}px;height:${isThin?sz*0.4:sz}px;background:${palette[i%palette.length]};border-radius:${isCirc?'50%':'2px'};--d:${(1.4+Math.random()*2).toFixed(2)}s;--dl:${(Math.random()).toFixed(2)}s`;
     stage.appendChild(el);
   }
   setTimeout(() => { stage.innerHTML = ''; }, 3500);
 }
-
-/* ── COUNTDOWN ── */
 function pad(n) { return String(n).padStart(2,'0'); }
 function updateCountdown() {
   const diff = new Date('2026-06-13T17:00:00+05:30').getTime() - Date.now();
-  if (diff <= 0) {
-    ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => { const e=document.getElementById(id); if(e) e.textContent='00'; });
-    return;
-  }
-  const set = (id,v) => { const e=document.getElementById(id); if(e) e.textContent=pad(v); };
-  set('cd-days',  Math.floor(diff/86400000));
-  set('cd-hours', Math.floor((diff%86400000)/3600000));
-  set('cd-mins',  Math.floor((diff%3600000)/60000));
-  set('cd-secs',  Math.floor((diff%60000)/1000));
+  if (diff <= 0) { ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent='00';}); return; }
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=pad(v);};
+  set('cd-days',Math.floor(diff/86400000)); set('cd-hours',Math.floor((diff%86400000)/3600000)); set('cd-mins',Math.floor((diff%3600000)/60000)); set('cd-secs',Math.floor((diff%60000)/1000));
 }
-
-/* ── SHARE ── */
 function shareWA() {
-  const msg = encodeURIComponent('🎀 You\'re invited to DIVI S Kumar\'s 1st Birthday!\n📅 June 13, 2026  |  🕕 5:00 PM\n✦ Join us for this precious milestone!\n\nOpen your invitation: ' + INVITE_URL);
+  const msg = encodeURIComponent('🎀 You\'re invited to DIVI S Kumar\'s 1st Birthday!\n📅 June 13, 2026  |  🕕 5:00 PM\n✦ Join us!\n\n' + INVITE_URL);
   window.open('https://wa.me/?text=' + msg, '_blank');
 }
 function copyLink() {
-  if (navigator.clipboard) { navigator.clipboard.writeText(INVITE_URL).catch(() => fallbackCopy(INVITE_URL)); }
-  else { fallbackCopy(INVITE_URL); }
-  const btn = document.getElementById('copy-btn');
-  btn.textContent = '✓  Copied!';
-  setTimeout(() => { btn.innerHTML = '🔗 &nbsp; Copy Link'; }, 2400);
+  if (navigator.clipboard) { navigator.clipboard.writeText(INVITE_URL).catch(()=>fallbackCopy(INVITE_URL)); } else { fallbackCopy(INVITE_URL); }
+  const btn = document.getElementById('copy-btn'); btn.textContent = '✓  Copied!';
+  setTimeout(()=>{ btn.innerHTML='🔗 &nbsp; Copy Link'; }, 2400);
 }
 function fallbackCopy(text) {
-  const ta = document.createElement('textarea');
-  ta.value = text; ta.style.cssText = 'position:fixed;opacity:0;';
+  const ta=document.createElement('textarea'); ta.value=text; ta.style.cssText='position:fixed;opacity:0;';
   document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
 }
-
-/* ── INIT ── */
-makeBalloons();
-makeShimmers();
-updateCountdown();
-setInterval(updateCountdown, 1000);
+makeBalloons(); makeShimmers(); updateCountdown(); setInterval(updateCountdown, 1000);
 document.getElementById('screen1').style.opacity = '1';
 </script>
 </body>
