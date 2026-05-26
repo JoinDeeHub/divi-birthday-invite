@@ -92,6 +92,82 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .cd-lbl  { font-size:8px; letter-spacing:2px; color:rgba(232,201,122,0.65); text-transform:uppercase; margin-top:4px; display:block; }
 .cd-sep  { font-family:'Cormorant Garamond',serif; font-size:36px; color:rgba(201,168,76,0.55); line-height:1.05; padding:0 2px; align-self:flex-start; }
 
+/* ── SCREEN 3B — CHARITY LUNCH ── */
+#screen3b {
+  background: linear-gradient(165deg, #fdf6f0 0%, #f5ede8 40%, #fdf0ea 100%);
+}
+.charity-halo {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: linear-gradient(135deg, rgba(232,201,122,0.22), rgba(201,168,76,0.08));
+  border: 1.5px solid rgba(201,168,76,0.5);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px; margin: 0 auto 10px;
+  box-shadow: 0 0 0 8px rgba(201,168,76,0.09);
+  animation: haloGlow 3s ease-in-out infinite;
+}
+@keyframes haloGlow {
+  0%,100% { box-shadow: 0 0 0 8px rgba(201,168,76,0.09); }
+  50%      { box-shadow: 0 0 0 14px rgba(201,168,76,0.18); }
+}
+.charity-eyebrow {
+  font-size: 9px; letter-spacing: 5px; color: #c9a84c;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.charity-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(26px, 7vw, 36px); font-weight: 300;
+  color: #7a3e52; line-height: 1.2; margin-bottom: 4px;
+}
+.charity-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-style: italic; color: #b8866e;
+  margin-bottom: 20px;
+}
+.charity-card {
+  background: #fffaf7;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 18px;
+  padding: 24px 22px;
+  width: 100%; max-width: 340px;
+  box-shadow: 0 8px 32px rgba(122,62,82,0.1);
+  position: relative;
+  text-align: left;
+}
+.charity-card::before {
+  content: '✦';
+  position: absolute; top: 14px; right: 18px;
+  font-size: 11px; color: rgba(201,168,76,0.4);
+}
+.charity-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; color: #6a4040; line-height: 1.85;
+  margin-bottom: 16px; text-align: center;
+}
+.charity-detail-row {
+  display: flex; align-items: flex-start; gap: 12px;
+  margin-bottom: 12px;
+}
+.c-icon {
+  width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(232,201,122,0.2), rgba(201,168,76,0.06));
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+.c-label { font-size: 8px; letter-spacing: 2px; color: #c9a84c; text-transform: uppercase; display: block; margin-bottom: 2px; }
+.c-value { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: #7a3e52; line-height: 1.3; }
+.c-sub   { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: #b8866e; font-style: italic; }
+.charity-quote {
+  margin-top: 14px; padding-top: 14px;
+  border-top: 1px solid rgba(201,168,76,0.2);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px; font-style: italic; color: #b8866e;
+  line-height: 1.8; text-align: center;
+}
+.hearts-row {
+  font-size: 18px; letter-spacing: 6px;
+  margin: 14px 0 4px; text-align: center;
+}
+
 /* ── SCREEN 4 ── */
 #screen4 {
   background: #fdf6f0;
@@ -139,7 +215,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 @keyframes popBounce { from{transform:scale(0) rotate(-25deg);opacity:0;} to{transform:scale(1) rotate(0deg);opacity:1;} }
 .success-title { font-family:'Cormorant Garamond',serif; font-size:40px; font-weight:300; color:#7a3e52; margin-bottom:12px; }
 .success-msg   { font-family:'Cormorant Garamond',serif; font-size:17px; font-style:italic; color:#8c6060; line-height:1.9; max-width:290px; margin:0 auto 28px; }
-/* highlighted words in decline message */
 .hi-pink  { color: #b8707e; font-style: italic; }
 .hi-gold  { color: #c9a84c; font-style: italic; }
 .share-row { display:flex; gap:12px; justify-content:center; margin-top:12px; }
@@ -205,18 +280,22 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   animation: revealPop 0.7s cubic-bezier(0.34,1.56,0.64,1) both;
 }
 @keyframes revealPop { from{transform:scale(0.3) rotate(-15deg);opacity:0;} to{transform:scale(1) rotate(0deg);opacity:1;} }
+
+/* ── SLOW ZOOM-OUT on reveal image ── */
 .reveal-frame img {
   width:100%; height:100%;
   object-fit:cover; object-position:center top;
   filter: blur(18px) brightness(0.85);
-  transform: scale(1.08);
-  animation: unblur 1.6s ease 0.25s forwards;
+  transform: scale(1.35);
+  animation: unblurZoomOut 2.8s ease 0.25s forwards;
 }
-@keyframes unblur {
-  0%   { filter: blur(18px) brightness(0.85); transform: scale(1.08); }
-  60%  { filter: blur(4px)  brightness(0.95); transform: scale(1.03); }
+@keyframes unblurZoomOut {
+  0%   { filter: blur(18px) brightness(0.85); transform: scale(1.35); }
+  40%  { filter: blur(6px)  brightness(0.92); transform: scale(1.18); }
+  75%  { filter: blur(1px)  brightness(0.98); transform: scale(1.06); }
   100% { filter: blur(0px)  brightness(1);    transform: scale(1);    }
 }
+
 .reveal-caption {
   font-family: 'Cormorant Garamond', serif;
   font-size: 22px; font-style: italic;
@@ -231,7 +310,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 }
 @keyframes revealFadeUp { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
 .reveal-close {
-  margin-top: 28px;
+  margin-top: 20px;
   background: transparent; border: 1px solid rgba(201,168,76,0.55);
   color: #e8c97a; padding: 10px 28px; border-radius: 30px;
   font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 3px;
@@ -239,6 +318,12 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   animation: revealFadeUp 0.6s ease 0.75s both;
 }
 .reveal-close:hover { background: rgba(201,168,76,0.15); }
+.reveal-credit {
+  font-size: 8px; letter-spacing: 2px; color: rgba(232,201,122,0.55);
+  font-family: 'Montserrat', sans-serif; margin-top: 10px;
+  animation: revealFadeUp 0.6s ease 0.95s both;
+}
+.reveal-credit span { font-style: italic; color: rgba(232,201,122,0.85); }
 
 /* Footer credit */
 .site-credit { font-size:9px; letter-spacing:1.5px; color:#b8707e; opacity:0.85; margin-top:60px; padding-bottom:20px; font-family:'Montserrat',sans-serif; }
@@ -258,6 +343,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   <div class="reveal-caption">Our little Divi ✨</div>
   <div class="reveal-sub">✦ &nbsp; turning one &nbsp; ✦</div>
   <button class="reveal-close" onclick="closeReveal()">Close &nbsp; ✕</button>
+  <div class="reveal-credit">Crafted with passion — <span>JoinDeeHub</span> by Divi's Mom</div>
 </div>
 
 <!-- SPLASH -->
@@ -324,7 +410,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
     <div>
       <span class="d-label">Venue</span>
       <span class="d-value">Radiant Resort</span>
-      <span class="d-sub">C.K.Palya Road, 17th km. Bannerghatta Road,Bengaluru, Karnataka 560083</span>
+      <span class="d-sub">C.K.Palya Road, 17th km. Bannerghatta Road, Bengaluru, Karnataka 560083</span>
     </div>
   </div>
   <div class="cd-box">
@@ -339,7 +425,55 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
       <div class="cd-unit"><span class="cd-num" id="cd-secs">--</span><span class="cd-lbl">Secs</span></div>
     </div>
   </div>
+  <button class="nav-link" onclick="goTo('3b')">A GIFT OF JOY &nbsp; →</button>
+</section>
+
+<!-- SCREEN 3B — CHARITY LUNCH -->
+<section class="screen" id="screen3b">
+  <div class="charity-halo">🌟</div>
+  <div class="charity-eyebrow">✦ &nbsp; A Gift from Divi's Heart &nbsp; ✦</div>
+  <div class="charity-title">A Lunch of Love</div>
+  <div class="charity-subtitle">Celebrating with those who feel joy deeply</div>
+
+  <div class="charity-card">
+    <div class="charity-desc">
+      As Divi turns one, we believe<br>
+      the greatest gift is sharing joy.<br><br>
+      On her birthday, we are hosting a<br>
+      <strong style="color:#7a3e52;font-style:normal;">special lunch</strong> for the wonderful<br>
+      children at
+    </div>
+
+    <div class="charity-detail-row">
+      <div class="c-icon">🏫</div>
+      <div>
+        <span class="c-label">Hosted At</span>
+        <span class="c-value">Shree Ramana Maharishi<br>Academy for the Blind</span>
+        <span class="c-sub">J P Nagar, Bangalore</span>
+      </div>
+    </div>
+
+    <div class="charity-detail-row">
+      <div class="c-icon">🍽️</div>
+      <div>
+        <span class="c-label">Event</span>
+        <span class="c-value">Birthday Lunch</span>
+        <span class="c-sub">June 13, 2026</span>
+      </div>
+    </div>
+
+    <div class="gold-divider" style="margin:14px auto 0;"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
+
+    <div class="charity-quote">
+      &ldquo;Happiness is most beautiful<br>when it is shared.&rdquo;<br><br>
+      🌸 &nbsp; Divi's first birthday begins<br>with a heart full of giving. &nbsp; 🌸
+    </div>
+
+    <div class="hearts-row">🤍 &nbsp; 💛 &nbsp; 🤍</div>
+  </div>
+
   <button class="nav-link" onclick="goTo(4)">RSVP Now &nbsp; →</button>
+  <button class="nav-link" onclick="goTo(3)" style="margin-top:2px;">← Back to Details</button>
 </section>
 
 <!-- SCREEN 4 — RSVP -->
@@ -399,7 +533,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
     </div>
     <button class="submit-btn" onclick="submitRSVP()">✦ &nbsp; COUNT US IN — WE CAN'T WAIT! &nbsp; ✦</button>
   </div>
-  <button class="nav-link" onclick="goTo(3)" style="margin-top:16px;">← Back to Details</button>
+  <button class="nav-link" onclick="goTo('3b')" style="margin-top:16px;">← Back to Details</button>
 </section>
 
 <!-- SCREEN 5 — SUCCESS / DECLINE -->
