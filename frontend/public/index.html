@@ -177,12 +177,51 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .f-label { font-size:8px; letter-spacing:2.5px; color:#c9a84c; text-transform:uppercase; display:block; margin-bottom:4px; font-weight:500; }
 .f-pill  { display:flex; align-items:center; background:#fff; border:1px solid rgba(201,168,76,0.4); border-radius:50px; padding:0 14px; height:46px; gap:8px; transition:all 0.3s; box-shadow:0 2px 8px rgba(122,62,82,0.06); }
 .f-pill:focus-within { border-color:#c9a84c; box-shadow:0 0 0 3px rgba(201,168,76,0.12); }
+.f-pill.error { border-color:#e07070; box-shadow:0 0 0 3px rgba(220,100,100,0.12); }
 .f-pill-icon { font-size:15px; flex-shrink:0; opacity:0.75; }
 .f-pill input, .f-pill select { flex:1; border:none; background:transparent; color:#5c2a3c; font-family:'Montserrat',sans-serif; font-size:12px; outline:none; }
 .f-pill select { -webkit-appearance:none; -moz-appearance:none; appearance:none; cursor:pointer; }
 .f-pill-arrow { font-size:10px; color:#c9a84c; flex-shrink:0; pointer-events:none; }
 .submit-btn { width:100%; padding:12px 20px; background: linear-gradient(135deg, #c9a84c 0%, #e8d48a 40%, #d4b05a 70%, #c9a84c 100%); background-size:200%; color:#4a2e0a; border:none; border-radius:50px; font-family:'Montserrat',sans-serif; font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; cursor:pointer; box-shadow:0 5px 18px rgba(201,168,76,0.45), 0 2px 0 rgba(255,255,255,0.2) inset; transition:all 0.3s; animation:goldGlow 3s ease-in-out infinite; margin-top:4px; }
 .submit-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(201,168,76,0.55); }
+
+/* ── NAME PROMPT OVERLAY (for decline) ── */
+#name-prompt-overlay {
+  position: fixed; inset: 0; z-index: 150;
+  background: rgba(90,40,55,0.82);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#name-prompt-overlay.show { opacity: 1; pointer-events: all; }
+.name-prompt-box {
+  background: #fffaf7;
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 20px;
+  padding: 32px 28px;
+  width: min(90vw, 320px);
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes popIn { from{transform:scale(0.8);opacity:0;} to{transform:scale(1);opacity:1;} }
+.np-emoji { font-size: 36px; margin-bottom: 8px; }
+.np-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: #7a3e52; margin-bottom: 4px; }
+.np-sub   { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; color: #b8866e; margin-bottom: 20px; line-height: 1.5; }
+.np-pill  { display:flex; align-items:center; background:#fff; border:1.5px solid rgba(201,168,76,0.5); border-radius:50px; padding:0 16px; height:48px; gap:10px; margin-bottom:16px; }
+.np-pill:focus-within { border-color:#c9a84c; box-shadow:0 0 0 3px rgba(201,168,76,0.15); }
+.np-pill input { flex:1; border:none; background:transparent; color:#5c2a3c; font-family:'Montserrat',sans-serif; font-size:13px; outline:none; }
+.np-confirm {
+  width: 100%; padding: 12px; border: none; border-radius: 50px;
+  background: linear-gradient(135deg,#7a3e52,#b8707e);
+  color: #fdf6f0; font-family:'Montserrat',sans-serif;
+  font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+  cursor:pointer; box-shadow:0 5px 18px rgba(122,62,82,0.35);
+  transition:all 0.2s;
+}
+.np-confirm:hover { transform:translateY(-1px); }
+.np-skip { margin-top:10px; background:transparent; border:none; color:#b8866e; font-family:'Montserrat',sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; padding:6px; }
 
 #screen5 { background:linear-gradient(165deg,#fdf6f0 0%,#fdeee6 50%,#fdf6f0 100%); }
 #confetti-stage { position:fixed; inset:0; pointer-events:none; z-index:99; overflow:hidden; }
@@ -232,6 +271,21 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 
 <div id="balloon-canvas"></div>
 <div id="confetti-stage"></div>
+
+<!-- NAME PROMPT OVERLAY for decline -->
+<div id="name-prompt-overlay">
+  <div class="name-prompt-box">
+    <div class="np-emoji">💌</div>
+    <div class="np-title">So sorry you can't make it</div>
+    <div class="np-sub">May we know your name?<br>So Divi knows whose love was sent 🌸</div>
+    <div class="np-pill">
+      <span style="font-size:15px;opacity:0.75;">👤</span>
+      <input type="text" id="decline-name" placeholder="Your name or family…" autocomplete="name" />
+    </div>
+    <button class="np-confirm" onclick="confirmDecline()">Send Love 💛</button>
+    <button class="np-skip" onclick="confirmDecline(true)">Skip</button>
+  </div>
+</div>
 
 <div id="photo-reveal">
   <div class="reveal-frame"><img id="reveal-img" src="./DIVI_baby.jpeg" alt="Divi" /></div>
@@ -350,20 +404,20 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   <div class="rsvp-sub">✦ &nbsp; Kindly respond by June 5th &nbsp; ✦</div>
   <div id="rsvp-choice" style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:300px;">
     <button class="btn-yes" onclick="showForm()">🎉 &nbsp; Yes, we'll be there!</button>
-    <button class="btn-no"  onclick="declineRSVP()">💌 &nbsp; Sending love, can't make it</button>
+    <button class="btn-no"  onclick="showDeclinePrompt()">💌 &nbsp; Sending love, can't make it</button>
   </div>
   <div class="rsvp-form" id="rsvp-form" style="display:none;">
     <div class="f-group">
-      <label class="f-label">Your Name / Family</label>
-      <div class="f-pill"><span class="f-pill-icon">👤</span><input type="text" id="guest-name" placeholder="e.g. KOTTILINGAL Family…" autocomplete="name"/></div>
+      <label class="f-label">Your Name / Family <span style="color:#e07070;">*</span></label>
+      <div class="f-pill" id="name-pill"><span class="f-pill-icon">👤</span><input type="text" id="guest-name" placeholder="e.g. Sharma Family…" autocomplete="name"/></div>
     </div>
     <div class="f-group">
       <label class="f-label">Adults Attending</label>
-      <div class="f-pill"><span class="f-pill-icon">👥</span><select id="adults"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5+">5 or more</option></select><span class="f-pill-arrow">▼</span></div>
+      <div class="f-pill"><span class="f-pill-icon">👥</span><select id="adults"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5 or more</option></select><span class="f-pill-arrow">▼</span></div>
     </div>
     <div class="f-group">
       <label class="f-label">Children Joining</label>
-      <div class="f-pill"><span class="f-pill-icon">👶</span><select id="kids"><option value="0" selected>None</option><option value="1">1</option><option value="2">2</option><option value="3+">3 or more</option></select><span class="f-pill-arrow">▼</span></div>
+      <div class="f-pill"><span class="f-pill-icon">👶</span><select id="kids"><option value="0" selected>None</option><option value="1">1</option><option value="2">2</option><option value="3">3 or more</option></select><span class="f-pill-arrow">▼</span></div>
     </div>
     <div class="f-group">
       <label class="f-label">Food Preference</label>
@@ -398,9 +452,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 <script>
 const SUPABASE_URL = 'https://ftktnegbjvpgwckbxzwi.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0a3RuZWdianZwZ3dja2J4endpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2OTA1MzMsImV4cCI6MjA5NTI2NjUzM30.hQOOhsqSaWF4FJ1Ufo8JASz6ZxHEXEgv-PCq_uGVSvk';
-
 const INVITE_URL = 'https://divi-doll-birthday.pages.dev';
-
 const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 let SESSION_ID = localStorage.getItem('divi_sid');
@@ -418,25 +470,12 @@ function getDevice() {
 
 async function trackVisitor() {
   try {
-    const { error } = await _sb.from('visitors').upsert({
-      session_id   : SESSION_ID,
-      referrer     : document.referrer || 'direct',
-      device       : getDevice(),
-      last_seen_at : new Date().toISOString()
-    }, { onConflict: 'session_id' });
-    if (error) console.warn('visitor track:', error.message);
-  } catch(e) { console.warn(e); }
+    await _sb.from('visitors').upsert({ session_id: SESSION_ID, referrer: document.referrer || 'direct', device: getDevice(), last_seen_at: new Date().toISOString() }, { onConflict: 'session_id' });
+  } catch(e) {}
 }
 
 async function logEvent(event_name, screen) {
-  try {
-    const { error } = await _sb.from('events').insert({
-      session_id : SESSION_ID,
-      event_name,
-      screen     : screen || null
-    });
-    if (error) console.warn('event log:', error.message);
-  } catch(e) { console.warn(e); }
+  try { await _sb.from('events').insert({ session_id: SESSION_ID, event_name, screen: screen || null }); } catch(e) {}
 }
 
 document.getElementById('splash-photo').style.backgroundImage = "url('./DIVI_baby.jpeg')";
@@ -501,9 +540,18 @@ function showForm() {
   logEvent('rsvp_yes_tap', 'screen4');
 }
 
-function declineRSVP() {
+// Show name prompt overlay before declining
+function showDeclinePrompt() {
   logEvent('rsvp_no_tap', 'screen4');
-  _sb.from('rsvps').insert({ session_id: SESSION_ID, name: 'Anonymous', attending: false, adults: 0, kids: 0, food: 'none' }).then(({error}) => { if(error) console.warn(error.message); });
+  document.getElementById('decline-name').value = '';
+  document.getElementById('name-prompt-overlay').classList.add('show');
+  setTimeout(() => document.getElementById('decline-name').focus(), 300);
+}
+
+function confirmDecline(skip) {
+  const name = skip ? 'Anonymous' : (document.getElementById('decline-name').value.trim() || 'Anonymous');
+  document.getElementById('name-prompt-overlay').classList.remove('show');
+  _sb.from('rsvps').insert({ session_id: SESSION_ID, name, attending: false, adults: 0, kids: 0, food: 'none' }).then(({error}) => { if(error) console.warn(error.message); });
   document.getElementById('success-icon').textContent  = '💌';
   document.getElementById('success-title').textContent = "We'll miss you!";
   document.getElementById('success-msg').innerHTML =
@@ -516,14 +564,23 @@ function declineRSVP() {
 }
 
 function submitRSVP() {
-  const name = document.getElementById('guest-name').value.trim() || 'Dear Family';
+  const nameInput = document.getElementById('guest-name');
+  const name = nameInput.value.trim();
+  if (!name) {
+    const pill = document.getElementById('name-pill');
+    pill.classList.add('error');
+    nameInput.focus();
+    nameInput.placeholder = 'Please enter your name ✨';
+    setTimeout(() => pill.classList.remove('error'), 2500);
+    return;
+  }
   const adults = parseInt(document.getElementById('adults').value) || 2;
   const kids   = parseInt(document.getElementById('kids').value)   || 0;
   const food   = document.getElementById('food').value;
   document.getElementById('success-icon').textContent  = '🎀';
   document.getElementById('success-title').textContent = "Yay! We can't wait!";
   document.getElementById('success-msg').innerHTML =
-    `We are so excited to celebrate with<br>Dee's wonderful family. 🤍<br><br>
+    `We are so excited to celebrate with<br><strong style="font-style:normal;color:#7a3e52;">${name}</strong> 🤍<br><br>
     Divi is thrilled to welcome you on<br><strong style="font-style:normal;color:#7a3e52;">June 13th! ✨</strong>`;
   _sb.from('rsvps').insert({ session_id: SESSION_ID, name, attending: true, adults, kids, food }).then(({error}) => { if(error) console.warn(error.message); });
   logEvent('rsvp_submitted', 'screen4');
@@ -574,6 +631,11 @@ document.getElementById('screen5').addEventListener('touchend', function(e) {
 document.getElementById('screen5').addEventListener('dblclick', function(e) {
   if (e.target.closest('#photo-reveal') || e.target.closest('button') || e.target.closest('.nav-link')) return;
   openReveal();
+});
+
+// Close name prompt on backdrop tap
+document.getElementById('name-prompt-overlay').addEventListener('click', function(e) {
+  if (e.target === this) confirmDecline(true);
 });
 
 let revealOpen = false;
