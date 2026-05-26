@@ -396,26 +396,19 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 </section>
 
 <script>
-// ═══════════════════════════════════════════
-// ⚠️  REPLACE THESE TWO VALUES after Supabase setup
-//     See supabase/README.md for instructions
-// ═══════════════════════════════════════════
-const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
-const SUPABASE_KEY = 'YOUR_ANON_PUBLIC_KEY';
+const SUPABASE_URL = 'https://ftktnegbjvpgwckbxzwi.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0a3RuZWdianZwZ3dja2J4endpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2OTA1MzMsImV4cCI6MjA5NTI2NjUzM30.hQOOhsqSaWF4FJ1Ufo8JASz6ZxHEXEgv-PCq_uGVSvk';
 
 const INVITE_URL = 'https://divi-doll-birthday.pages.dev';
 
-// Init Supabase client
 const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// ─── Session ID (persist per browser) ───────
 let SESSION_ID = localStorage.getItem('divi_sid');
 if (!SESSION_ID) {
   SESSION_ID = 'sid_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
   localStorage.setItem('divi_sid', SESSION_ID);
 }
 
-// ─── Detect device type ───────────────────
 function getDevice() {
   const ua = navigator.userAgent;
   if (/tablet|ipad|playbook|silk/i.test(ua)) return 'tablet';
@@ -423,7 +416,6 @@ function getDevice() {
   return 'desktop';
 }
 
-// ─── Track visitor (upsert) ──────────────
 async function trackVisitor() {
   try {
     const { error } = await _sb.from('visitors').upsert({
@@ -436,7 +428,6 @@ async function trackVisitor() {
   } catch(e) { console.warn(e); }
 }
 
-// ─── Log any event ────────────────────────
 async function logEvent(event_name, screen) {
   try {
     const { error } = await _sb.from('events').insert({
@@ -448,7 +439,6 @@ async function logEvent(event_name, screen) {
   } catch(e) { console.warn(e); }
 }
 
-// ─── Balloons & shimmers ─────────────────
 document.getElementById('splash-photo').style.backgroundImage = "url('./DIVI_baby.jpeg')";
 
 const COLORS = ['#f5c6d0','#f9d9b0','#fae8b8','#f4b8cc','#f7e4d4','#e8d0d0','#fde8c8'];
@@ -627,7 +617,6 @@ function copyLink() {
   });
 }
 
-// ─── Boot ────────────────────────────────
 makeBalloons();
 makeShimmers();
 updateCountdown();
