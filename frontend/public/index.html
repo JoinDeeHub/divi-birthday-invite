@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet"/>
+<!-- Supabase JS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { min-height: 100%; }
@@ -50,7 +52,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .nav-link { background:transparent; border:none; color:#c9a84c; font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; cursor:pointer; padding:8px 16px; border-bottom:1px solid transparent; transition:all 0.3s; }
 .nav-link:hover { border-bottom-color:#c9a84c; }
 
-/* ── SHARED GOLD CTA SHIMMER BASE ── */
 @keyframes goldGlow {
   0%,100% { background-position:0% 50%; box-shadow:0 4px 18px rgba(201,168,76,0.4); }
   50%      { background-position:100% 50%; box-shadow:0 6px 28px rgba(201,168,76,0.72); }
@@ -60,7 +61,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   50%     { box-shadow: 0 0 0 6px rgba(201,168,76,0), 0 6px 24px rgba(201,168,76,0.6); }
 }
 
-/* SCREEN 1 — Pill */
 #screen1 { background:linear-gradient(165deg,#fdf6f0 0%,#fdeee6 50%,#fdf6f0 100%); }
 .s1-tag { font-size:10px; letter-spacing:5px; color:#b8866e; text-transform:uppercase; margin-bottom:28px; }
 .env-wrap { cursor:pointer; margin-bottom:30px; animation:envFloat 3.5s ease-in-out infinite; transition:transform 0.2s; }
@@ -81,7 +81,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 }
 .cta-btn:hover { transform: translateY(-2px) scale(1.03); }
 
-/* SCREEN 2 */
 #screen2 { background:#fdf6f0; }
 .invite-card { background:#fffaf7; border:1px solid rgba(201,168,76,0.35); border-radius:20px; padding:30px 24px; width:100%; max-width:360px; box-shadow:0 1px 0 rgba(201,168,76,0.3) inset,0 12px 40px rgba(122,62,82,0.08); position:relative; }
 .invite-card::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 15% 10%,rgba(232,201,122,0.13) 0%,transparent 55%),radial-gradient(ellipse at 85% 90%,rgba(232,201,122,0.08) 0%,transparent 60%); pointer-events:none; }
@@ -107,7 +106,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 }
 .cta-btn-s2:hover { transform: translateY(-2px) scale(1.03); }
 
-/* SCREEN 3 */
 #screen3 { background:#fdf6f0; }
 .detail-card { background:#fffaf7; border:1px solid rgba(201,168,76,0.25); border-radius:14px; padding:13px 18px; width:100%; max-width:340px; margin-bottom:10px; display:flex; align-items:center; gap:14px; box-shadow:0 1px 3px rgba(122,62,82,0.06); transition:all 0.3s; }
 .detail-card:hover { box-shadow:0 6px 24px rgba(180,140,110,0.18); transform:translateY(-2px); }
@@ -140,21 +138,9 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 }
 .cta-btn-s3:hover { transform: translateY(-2px) scale(1.03); }
 
-/* SCREEN 3B */
 #screen3b { background: linear-gradient(165deg, #fdf6f0 0%, #f5ede8 40%, #fdf0ea 100%); }
-.charity-halo {
-  width: 70px; height: 70px; border-radius: 50%;
-  background: linear-gradient(135deg, rgba(232,201,122,0.22), rgba(201,168,76,0.08));
-  border: 1.5px solid rgba(201,168,76,0.5);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 34px; margin: 0 auto 8px;
-  box-shadow: 0 0 0 7px rgba(201,168,76,0.09);
-  animation: haloGlow 3s ease-in-out infinite;
-}
-@keyframes haloGlow {
-  0%,100% { box-shadow: 0 0 0 7px rgba(201,168,76,0.09); }
-  50%      { box-shadow: 0 0 0 12px rgba(201,168,76,0.18); }
-}
+.charity-halo { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, rgba(232,201,122,0.22), rgba(201,168,76,0.08)); border: 1.5px solid rgba(201,168,76,0.5); display: flex; align-items: center; justify-content: center; font-size: 34px; margin: 0 auto 8px; box-shadow: 0 0 0 7px rgba(201,168,76,0.09); animation: haloGlow 3s ease-in-out infinite; }
+@keyframes haloGlow { 0%,100% { box-shadow: 0 0 0 7px rgba(201,168,76,0.09); } 50% { box-shadow: 0 0 0 12px rgba(201,168,76,0.18); } }
 .charity-eyebrow { font-size: 9px; letter-spacing: 5px; color: #c9a84c; text-transform: uppercase; margin-bottom: 4px; }
 .charity-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 6vw, 32px); font-weight: 300; color: #7a3e52; line-height: 1.2; margin-bottom: 2px; }
 .charity-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; color: #b8866e; margin-bottom: 14px; }
@@ -172,27 +158,10 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .c-sub   { font-family: 'Cormorant Garamond', serif; font-size: 12px; color: #b8866e; font-style: italic; }
 .charity-quote { margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(201,168,76,0.2); font-family: 'Cormorant Garamond', serif; font-size: 12px; font-style: italic; color: #b8866e; line-height: 1.75; text-align: center; }
 .hearts-row { font-size: 16px; letter-spacing: 5px; margin: 10px 0 2px; text-align: center; }
-.cta-btn-s3b {
-  background: linear-gradient(125deg, #c9a84c 0%, #f8e87a 28%, #e8c040 55%, #f5dc80 78%, #c9a84c 100%);
-  background-size: 270% 100%;
-  border: none; color: #3a2000;
-  padding: 11px 32px;
-  font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
-  cursor: pointer;
-  width: 100%; max-width: 260px;
-  border-radius: 40px 10px 40px 10px;
-  box-shadow: 0 5px 22px rgba(201,168,76,0.45), inset 0 1px 0 rgba(255,255,200,0.5);
-  transition: transform 0.2s;
-  animation: goldGlow 2.6s ease-in-out infinite;
-  margin-top: 12px;
-}
+.cta-btn-s3b { background: linear-gradient(125deg, #c9a84c 0%, #f8e87a 28%, #e8c040 55%, #f5dc80 78%, #c9a84c 100%); background-size: 270% 100%; border: none; color: #3a2000; padding: 11px 32px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; cursor: pointer; width: 100%; max-width: 260px; border-radius: 40px 10px 40px 10px; box-shadow: 0 5px 22px rgba(201,168,76,0.45), inset 0 1px 0 rgba(255,255,200,0.5); transition: transform 0.2s; animation: goldGlow 2.6s ease-in-out infinite; margin-top: 12px; }
 .cta-btn-s3b:hover { transform: translateY(-2px) scale(1.03); }
 
-/* SCREEN 4 */
-#screen4 {
-  background: #fdf6f0;
-  background-image: radial-gradient(ellipse at 10% 0%, rgba(245,200,190,0.25) 0%, transparent 50%), radial-gradient(ellipse at 90% 100%, rgba(245,200,190,0.2) 0%, transparent 50%);
-}
+#screen4 { background: #fdf6f0; background-image: radial-gradient(ellipse at 10% 0%, rgba(245,200,190,0.25) 0%, transparent 50%), radial-gradient(ellipse at 90% 100%, rgba(245,200,190,0.2) 0%, transparent 50%); }
 .rsvp-crown { font-size: 34px; margin-bottom: 2px; }
 .rsvp-ornament { font-size: 11px; letter-spacing: 6px; color: #c9a84c; margin-bottom: 4px; }
 .rsvp-headline-1 { font-family:'Cormorant Garamond',serif; font-size: clamp(28px,8vw,40px); font-weight:400; color:#7a3e52; line-height:1.1; margin-bottom:0; }
@@ -212,19 +181,9 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .f-pill input, .f-pill select { flex:1; border:none; background:transparent; color:#5c2a3c; font-family:'Montserrat',sans-serif; font-size:12px; outline:none; }
 .f-pill select { -webkit-appearance:none; -moz-appearance:none; appearance:none; cursor:pointer; }
 .f-pill-arrow { font-size:10px; color:#c9a84c; flex-shrink:0; pointer-events:none; }
-.submit-btn {
-  width:100%; padding:12px 20px;
-  background: linear-gradient(135deg, #c9a84c 0%, #e8d48a 40%, #d4b05a 70%, #c9a84c 100%);
-  background-size:200%;
-  color:#4a2e0a; border:none; border-radius:50px;
-  font-family:'Montserrat',sans-serif; font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase;
-  cursor:pointer;
-  box-shadow:0 5px 18px rgba(201,168,76,0.45), 0 2px 0 rgba(255,255,255,0.2) inset;
-  transition:all 0.3s; animation:goldGlow 3s ease-in-out infinite; margin-top:4px;
-}
+.submit-btn { width:100%; padding:12px 20px; background: linear-gradient(135deg, #c9a84c 0%, #e8d48a 40%, #d4b05a 70%, #c9a84c 100%); background-size:200%; color:#4a2e0a; border:none; border-radius:50px; font-family:'Montserrat',sans-serif; font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; cursor:pointer; box-shadow:0 5px 18px rgba(201,168,76,0.45), 0 2px 0 rgba(255,255,255,0.2) inset; transition:all 0.3s; animation:goldGlow 3s ease-in-out infinite; margin-top:4px; }
 .submit-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(201,168,76,0.55); }
 
-/* SCREEN 5 */
 #screen5 { background:linear-gradient(165deg,#fdf6f0 0%,#fdeee6 50%,#fdf6f0 100%); }
 #confetti-stage { position:fixed; inset:0; pointer-events:none; z-index:99; overflow:hidden; }
 .cp { position:absolute; top:-20px; animation:cpFall var(--d) ease-in forwards var(--dl); }
@@ -249,25 +208,9 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .tap-ring { width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid rgba(184,112,126,0.5); display: flex; align-items: center; justify-content: center; position: relative; }
 .tap-ring::after { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.35); animation: ripple 2.2s ease-out infinite; }
 @keyframes ripple { 0%{opacity:0.8;transform:scale(0.85);} 100%{opacity:0;transform:scale(1.5);} }
-.cta-btn-s5 {
-  background: linear-gradient(130deg, #c9a84c 0%, #f8e87a 25%, #e8c040 50%, #f5dc80 75%, #c9a84c 100%);
-  background-size: 260% 100%;
-  border: 2.5px solid rgba(255,240,150,0.6);
-  color: #3a2000;
-  padding: 11px 34px;
-  font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
-  cursor: pointer;
-  width: 100%; max-width: 260px;
-  border-radius: 6px;
-  clip-path: polygon(14px 0%, calc(100% - 14px) 0%, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0% calc(100% - 14px), 0% 14px);
-  box-shadow: 0 5px 22px rgba(201,168,76,0.5), inset 0 1px 0 rgba(255,255,200,0.5);
-  transition: transform 0.2s;
-  animation: goldGlow 2.4s ease-in-out infinite, goldPulse 2.4s ease-in-out infinite;
-  margin-top: 10px;
-}
+.cta-btn-s5 { background: linear-gradient(130deg, #c9a84c 0%, #f8e87a 25%, #e8c040 50%, #f5dc80 75%, #c9a84c 100%); background-size: 260% 100%; border: 2.5px solid rgba(255,240,150,0.6); color: #3a2000; padding: 11px 34px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; cursor: pointer; width: 100%; max-width: 260px; border-radius: 6px; clip-path: polygon(14px 0%, calc(100% - 14px) 0%, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0% calc(100% - 14px), 0% 14px); box-shadow: 0 5px 22px rgba(201,168,76,0.5), inset 0 1px 0 rgba(255,255,200,0.5); transition: transform 0.2s; animation: goldGlow 2.4s ease-in-out infinite, goldPulse 2.4s ease-in-out infinite; margin-top: 10px; }
 .cta-btn-s5:hover { transform: translateY(-2px) scale(1.04); }
 
-/* ── PHOTO REVEAL ── */
 #photo-reveal { position: fixed; inset: 0; z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(90,40,55,0.90); backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
 #photo-reveal.show { opacity: 1; pointer-events: all; }
 .reveal-frame { position: relative; width: min(72vw, 280px); height: min(92vw, 360px); border-radius: 50%; border: 3px solid #c9a84c; box-shadow: 0 0 0 8px rgba(201,168,76,0.18), 0 12px 50px rgba(0,0,0,0.45); overflow: hidden; animation: revealPop 0.7s cubic-bezier(0.34,1.56,0.64,1) both; }
@@ -290,7 +233,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 <div id="balloon-canvas"></div>
 <div id="confetti-stage"></div>
 
-<!-- PHOTO REVEAL OVERLAY -->
 <div id="photo-reveal">
   <div class="reveal-frame"><img id="reveal-img" src="./DIVI_baby.jpeg" alt="Divi" /></div>
   <div class="reveal-caption">Our little Divi ✨</div>
@@ -299,7 +241,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   <div class="reveal-credit">Crafted with passion — <span>JoinDeeHub</span> by Divi's Mom</div>
 </div>
 
-<!-- SPLASH -->
 <div id="splash">
   <div id="splash-photo"></div>
   <div id="splash-overlay"></div>
@@ -310,7 +251,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   </div>
 </div>
 
-<!-- SCREEN 1 — LANDING -->
 <section class="screen active" id="screen1">
   <div class="s1-tag">A First Birthday Celebration</div>
   <div class="env-wrap" onclick="goTo(2)" role="button" aria-label="Open invitation">
@@ -332,7 +272,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   <button class="cta-btn" onclick="goTo(2)">💌 &nbsp; Open Invitation &nbsp; ✦</button>
 </section>
 
-<!-- SCREEN 2 — INVITE CARD -->
 <section class="screen" id="screen2">
   <div class="invite-card">
     <div class="card-eyebrow">✦ &nbsp; You are cordially invited &nbsp; ✦</div>
@@ -347,7 +286,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   <button class="cta-btn-s2" onclick="goTo(3)">🎉 &nbsp; See Party Details</button>
 </section>
 
-<!-- SCREEN 3 — DETAILS & COUNTDOWN -->
 <section class="screen" id="screen3">
   <div class="eyebrow">✦ &nbsp; Celebration Details &nbsp; ✦</div>
   <div class="detail-card">
@@ -381,42 +319,29 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   <button class="cta-btn-s3" onclick="goTo('3b')">🎁 &nbsp; A Special Gift &nbsp; →</button>
 </section>
 
-<!-- SCREEN 3B — CHARITY LUNCH -->
 <section class="screen" id="screen3b">
   <div class="charity-halo">🌟</div>
   <div class="charity-eyebrow">✦ &nbsp; A Gift from Divi's Heart &nbsp; ✦</div>
   <div class="charity-title">A Lunch of Love</div>
   <div class="charity-subtitle">Celebrating with those who feel joy deeply</div>
   <div class="charity-card">
-    <div class="charity-desc">
-      We believe the greatest gift is sharing joy.<br>
-      So we are hosting a <strong style="color:#7a3e52;font-style:normal;">special lunch</strong><br>
-      for the wonderful children at
-    </div>
+    <div class="charity-desc">We believe the greatest gift is sharing joy.<br>So we are hosting a <strong style="color:#7a3e52;font-style:normal;">special lunch</strong><br>for the wonderful children at</div>
     <div class="charity-school">
       <span class="charity-school-name">Shree Ramana Maharishi<br>Academy for the Blind</span>
       <span class="charity-school-loc">J P Nagar, Bangalore</span>
     </div>
     <div class="charity-detail-row">
       <div class="c-icon">🍽️</div>
-      <div>
-        <span class="c-label">Event</span>
-        <span class="c-value">Birthday Lunch</span>
-        <span class="c-sub">June 13, 2026</span>
-      </div>
+      <div><span class="c-label">Event</span><span class="c-value">Birthday Lunch</span><span class="c-sub">June 13, 2026</span></div>
     </div>
     <div class="gold-divider" style="margin:10px auto 0;"><div class="g-line"></div><div class="g-diam"></div><div class="g-line"></div></div>
-    <div class="charity-quote">
-      &ldquo;Happiness is most beautiful<br>when it is shared.&rdquo;<br><br>
-      🌸 &nbsp; A heart full of giving — that's how<br>we welcome this beautiful milestone. &nbsp; 🌸
-    </div>
+    <div class="charity-quote">&ldquo;Happiness is most beautiful<br>when it is shared.&rdquo;<br><br>🌸 &nbsp; A heart full of giving — that's how<br>we welcome this beautiful milestone. &nbsp; 🌸</div>
     <div class="hearts-row">🤍 &nbsp; 💛 &nbsp; 🤍</div>
   </div>
   <button class="cta-btn-s3b" onclick="goTo(4)">👋 &nbsp; RSVP Now — Join Us!</button>
   <button class="nav-link" onclick="goTo(3)" style="margin-top:4px;">← Back to Details</button>
 </section>
 
-<!-- SCREEN 4 — RSVP -->
 <section class="screen" id="screen4">
   <div class="rsvp-crown">👑</div>
   <div class="rsvp-ornament">♥️─────────</div>
@@ -449,7 +374,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   <button class="nav-link" onclick="goTo('3b')" style="margin-top:12px;">← Back</button>
 </section>
 
-<!-- SCREEN 5 — SUCCESS / DECLINE -->
 <section class="screen" id="screen5">
   <div class="success-ring" id="success-icon">🎀</div>
   <div class="success-title" id="success-title">Yay! We can't wait!</div>
@@ -472,9 +396,59 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 </section>
 
 <script>
-const API_URL    = 'https://divi-birthday-invite.onrender.com';
+// ═══════════════════════════════════════════
+// ⚠️  REPLACE THESE TWO VALUES after Supabase setup
+//     See supabase/README.md for instructions
+// ═══════════════════════════════════════════
+const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
+const SUPABASE_KEY = 'YOUR_ANON_PUBLIC_KEY';
+
 const INVITE_URL = 'https://divi-doll-birthday.pages.dev';
 
+// Init Supabase client
+const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ─── Session ID (persist per browser) ───────
+let SESSION_ID = localStorage.getItem('divi_sid');
+if (!SESSION_ID) {
+  SESSION_ID = 'sid_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
+  localStorage.setItem('divi_sid', SESSION_ID);
+}
+
+// ─── Detect device type ───────────────────
+function getDevice() {
+  const ua = navigator.userAgent;
+  if (/tablet|ipad|playbook|silk/i.test(ua)) return 'tablet';
+  if (/mobile|iphone|ipod|android|blackberry|opera mini|iemobile/i.test(ua)) return 'mobile';
+  return 'desktop';
+}
+
+// ─── Track visitor (upsert) ──────────────
+async function trackVisitor() {
+  try {
+    const { error } = await _sb.from('visitors').upsert({
+      session_id   : SESSION_ID,
+      referrer     : document.referrer || 'direct',
+      device       : getDevice(),
+      last_seen_at : new Date().toISOString()
+    }, { onConflict: 'session_id' });
+    if (error) console.warn('visitor track:', error.message);
+  } catch(e) { console.warn(e); }
+}
+
+// ─── Log any event ────────────────────────
+async function logEvent(event_name, screen) {
+  try {
+    const { error } = await _sb.from('events').insert({
+      session_id : SESSION_ID,
+      event_name,
+      screen     : screen || null
+    });
+    if (error) console.warn('event log:', error.message);
+  } catch(e) { console.warn(e); }
+}
+
+// ─── Balloons & shimmers ─────────────────
 document.getElementById('splash-photo').style.backgroundImage = "url('./DIVI_baby.jpeg')";
 
 const COLORS = ['#f5c6d0','#f9d9b0','#fae8b8','#f4b8cc','#f7e4d4','#e8d0d0','#fde8c8'];
@@ -525,6 +499,7 @@ function goTo(n) {
         target.style.opacity = '1'; target.style.pointerEvents = 'all';
       }));
       window.scrollTo({ top: 0, behavior: 'instant' });
+      logEvent('screen_view', 'screen' + n);
       if (n === 5) { launchConfetti(); }
     });
   }, 400);
@@ -533,10 +508,12 @@ function goTo(n) {
 function showForm() {
   document.getElementById('rsvp-choice').style.display = 'none';
   document.getElementById('rsvp-form').style.display   = 'block';
+  logEvent('rsvp_yes_tap', 'screen4');
 }
 
 function declineRSVP() {
-  sendToAPI({ name: 'Anonymous', attending: false, adults: 0, kids: 0, food: 'none' });
+  logEvent('rsvp_no_tap', 'screen4');
+  _sb.from('rsvps').insert({ session_id: SESSION_ID, name: 'Anonymous', attending: false, adults: 0, kids: 0, food: 'none' }).then(({error}) => { if(error) console.warn(error.message); });
   document.getElementById('success-icon').textContent  = '💌';
   document.getElementById('success-title').textContent = "We'll miss you!";
   document.getElementById('success-msg').innerHTML =
@@ -549,28 +526,18 @@ function declineRSVP() {
 }
 
 function submitRSVP() {
+  const name = document.getElementById('guest-name').value.trim() || 'Dear Family';
+  const adults = parseInt(document.getElementById('adults').value) || 2;
+  const kids   = parseInt(document.getElementById('kids').value)   || 0;
+  const food   = document.getElementById('food').value;
   document.getElementById('success-icon').textContent  = '🎀';
   document.getElementById('success-title').textContent = "Yay! We can't wait!";
   document.getElementById('success-msg').innerHTML =
     `We are so excited to celebrate with<br>Dee's wonderful family. 🤍<br><br>
     Divi is thrilled to welcome you on<br><strong style="font-style:normal;color:#7a3e52;">June 13th! ✨</strong>`;
-  const name = document.getElementById('guest-name').value.trim() || 'Dear Family';
+  _sb.from('rsvps').insert({ session_id: SESSION_ID, name, attending: true, adults, kids, food }).then(({error}) => { if(error) console.warn(error.message); });
+  logEvent('rsvp_submitted', 'screen4');
   goTo(5);
-  sendToAPI({
-    name,
-    attending : true,
-    adults    : parseInt(document.getElementById('adults').value) || 2,
-    kids      : parseInt(document.getElementById('kids').value)   || 0,
-    food      : document.getElementById('food').value
-  });
-}
-
-function sendToAPI(data) {
-  return fetch(API_URL + '/api/rsvp', {
-    method  : 'POST',
-    headers : { 'Content-Type': 'application/json' },
-    body    : JSON.stringify(data)
-  }).catch(e => console.warn('RSVP API error:', e));
 }
 
 function resetInvite() {
@@ -629,6 +596,7 @@ function openReveal() {
   frame.replaceChild(newImg, oldImg);
   document.getElementById('photo-reveal').classList.add('show');
   launchConfetti();
+  logEvent('photo_reveal', 'screen5');
 }
 function closeReveal() {
   revealOpen = false;
@@ -646,10 +614,12 @@ function updateCountdown() {
 }
 
 function shareWA() {
+  logEvent('wa_share', 'screen5');
   const msg = "You're invited to DIVI's 1st Birthday! 🎀✨\n\nJoin us on June 13, 2026 at 5:00 PM\nRadiant Resort, Bengaluru\n\nOpen your invitation here 👇\n" + INVITE_URL;
   window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
 }
 function copyLink() {
+  logEvent('copy_link', 'screen5');
   navigator.clipboard.writeText(INVITE_URL).then(() => {
     const btn = document.getElementById('copy-btn');
     btn.textContent = '✓ Copied!';
@@ -657,11 +627,14 @@ function copyLink() {
   });
 }
 
+// ─── Boot ────────────────────────────────
 makeBalloons();
 makeShimmers();
 updateCountdown();
 setInterval(updateCountdown, 1000);
 document.getElementById('screen1').style.opacity = '1';
+trackVisitor();
+logEvent('screen_view', 'screen1');
 </script>
 </body>
 </html>
