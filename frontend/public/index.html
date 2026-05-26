@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet"/>
-<!-- Supabase JS -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -173,19 +172,49 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .btn-no:hover { background:rgba(122,62,82,0.06); border-color:rgba(122,62,82,0.5); }
 .rsvp-form { width:100%; max-width:300px; animation:fadeUp 0.5s ease both; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:translateY(0);} }
-.f-group { margin-bottom:12px; text-align:left; }
-.f-label { font-size:8px; letter-spacing:2.5px; color:#c9a84c; text-transform:uppercase; display:block; margin-bottom:4px; font-weight:500; }
+.f-group { margin-bottom:14px; text-align:left; }
+.f-label { font-size:8px; letter-spacing:2.5px; color:#c9a84c; text-transform:uppercase; display:block; margin-bottom:6px; font-weight:500; }
 .f-pill  { display:flex; align-items:center; background:#fff; border:1px solid rgba(201,168,76,0.4); border-radius:50px; padding:0 14px; height:46px; gap:8px; transition:all 0.3s; box-shadow:0 2px 8px rgba(122,62,82,0.06); }
 .f-pill:focus-within { border-color:#c9a84c; box-shadow:0 0 0 3px rgba(201,168,76,0.12); }
-.f-pill.error { border-color:#e07070; box-shadow:0 0 0 3px rgba(220,100,100,0.12); }
+.f-pill.error { border-color:#e07070; box-shadow:0 0 0 3px rgba(220,100,100,0.12); animation: shakePill 0.4s ease; }
+@keyframes shakePill { 0%,100%{transform:translateX(0);} 20%,60%{transform:translateX(-6px);} 40%,80%{transform:translateX(6px);} }
 .f-pill-icon { font-size:15px; flex-shrink:0; opacity:0.75; }
-.f-pill input, .f-pill select { flex:1; border:none; background:transparent; color:#5c2a3c; font-family:'Montserrat',sans-serif; font-size:12px; outline:none; }
-.f-pill select { -webkit-appearance:none; -moz-appearance:none; appearance:none; cursor:pointer; }
-.f-pill-arrow { font-size:10px; color:#c9a84c; flex-shrink:0; pointer-events:none; }
+.f-pill input { flex:1; border:none; background:transparent; color:#5c2a3c; font-family:'Montserrat',sans-serif; font-size:12px; outline:none; }
+
+/* ── STEPPER ── */
+.stepper { display:flex; align-items:center; background:#fff; border:1px solid rgba(201,168,76,0.4); border-radius:50px; height:46px; overflow:hidden; box-shadow:0 2px 8px rgba(122,62,82,0.06); transition:all 0.3s; }
+.stepper:focus-within { border-color:#c9a84c; box-shadow:0 0 0 3px rgba(201,168,76,0.12); }
+.stepper-icon { font-size:15px; padding-left:14px; opacity:0.75; flex-shrink:0; }
+.step-btn { width:36px; height:36px; border:none; background:transparent; font-size:18px; color:#7a3e52; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background 0.2s, transform 0.1s; border-radius:50%; margin:0 2px; font-weight:300; line-height:1; }
+.step-btn:hover { background:rgba(122,62,82,0.08); }
+.step-btn:active { transform:scale(0.88); }
+.step-val { flex:1; text-align:center; font-family:'Cormorant Garamond',serif; font-size:20px; color:#7a3e52; font-weight:400; pointer-events:none; user-select:none; }
+.step-val-label { font-family:'Montserrat',sans-serif; font-size:10px; color:#b8866e; pointer-events:none; }
+
+/* ── FOOD TOGGLE ── */
+.food-toggle { display:flex; gap:6px; }
+.food-pill {
+  flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:2px; padding:10px 6px 8px;
+  background:#fff; border:1.5px solid rgba(201,168,76,0.3); border-radius:14px;
+  cursor:pointer; transition:all 0.25s; box-shadow:0 2px 8px rgba(122,62,82,0.05);
+  font-family:'Montserrat',sans-serif;
+}
+.food-pill:hover { border-color:rgba(201,168,76,0.65); background:rgba(201,168,76,0.05); transform:translateY(-1px); }
+.food-pill.active {
+  background:linear-gradient(135deg,rgba(201,168,76,0.18),rgba(201,168,76,0.06));
+  border-color:#c9a84c;
+  box-shadow:0 0 0 3px rgba(201,168,76,0.14), 0 4px 12px rgba(201,168,76,0.2);
+  transform:translateY(-2px);
+}
+.fp-emoji { font-size:20px; line-height:1; }
+.fp-label { font-size:8px; letter-spacing:1.5px; text-transform:uppercase; color:#7a3e52; font-weight:500; white-space:nowrap; }
+.food-pill.active .fp-label { color:#7a3e52; font-weight:700; }
+
 .submit-btn { width:100%; padding:12px 20px; background: linear-gradient(135deg, #c9a84c 0%, #e8d48a 40%, #d4b05a 70%, #c9a84c 100%); background-size:200%; color:#4a2e0a; border:none; border-radius:50px; font-family:'Montserrat',sans-serif; font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; cursor:pointer; box-shadow:0 5px 18px rgba(201,168,76,0.45), 0 2px 0 rgba(255,255,255,0.2) inset; transition:all 0.3s; animation:goldGlow 3s ease-in-out infinite; margin-top:4px; }
 .submit-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(201,168,76,0.55); }
 
-/* ── NAME PROMPT OVERLAY (for decline) ── */
+/* ── NAME PROMPT OVERLAY ── */
 #name-prompt-overlay {
   position: fixed; inset: 0; z-index: 150;
   background: rgba(90,40,55,0.82);
@@ -272,7 +301,6 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 <div id="balloon-canvas"></div>
 <div id="confetti-stage"></div>
 
-<!-- NAME PROMPT OVERLAY for decline -->
 <div id="name-prompt-overlay">
   <div class="name-prompt-box">
     <div class="np-emoji">💌</div>
@@ -402,27 +430,60 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
   <div class="rsvp-headline-1">We would love</div>
   <div class="rsvp-headline-2">to celebrate with you!</div>
   <div class="rsvp-sub">✦ &nbsp; Kindly respond by June 5th &nbsp; ✦</div>
+
   <div id="rsvp-choice" style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:300px;">
     <button class="btn-yes" onclick="showForm()">🎉 &nbsp; Yes, we'll be there!</button>
     <button class="btn-no"  onclick="showDeclinePrompt()">💌 &nbsp; Sending love, can't make it</button>
   </div>
+
   <div class="rsvp-form" id="rsvp-form" style="display:none;">
+    <!-- Name -->
     <div class="f-group">
       <label class="f-label">Your Name / Family <span style="color:#e07070;">*</span></label>
       <div class="f-pill" id="name-pill"><span class="f-pill-icon">👤</span><input type="text" id="guest-name" placeholder="e.g. Sharma Family…" autocomplete="name"/></div>
     </div>
+
+    <!-- Adults stepper -->
     <div class="f-group">
       <label class="f-label">Adults Attending</label>
-      <div class="f-pill"><span class="f-pill-icon">👥</span><select id="adults"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5 or more</option></select><span class="f-pill-arrow">▼</span></div>
+      <div class="stepper">
+        <span class="stepper-icon">👥</span>
+        <button class="step-btn" onclick="stepChange('adults',-1)" type="button">−</button>
+        <div class="step-val" id="adults-display">2<br><span class="step-val-label">adults</span></div>
+        <button class="step-btn" onclick="stepChange('adults',1)" type="button">+</button>
+      </div>
     </div>
+
+    <!-- Kids stepper -->
     <div class="f-group">
       <label class="f-label">Children Joining</label>
-      <div class="f-pill"><span class="f-pill-icon">👶</span><select id="kids"><option value="0" selected>None</option><option value="1">1</option><option value="2">2</option><option value="3">3 or more</option></select><span class="f-pill-arrow">▼</span></div>
+      <div class="stepper">
+        <span class="stepper-icon">👶</span>
+        <button class="step-btn" onclick="stepChange('kids',-1)" type="button">−</button>
+        <div class="step-val" id="kids-display">0<br><span class="step-val-label">little ones</span></div>
+        <button class="step-btn" onclick="stepChange('kids',1)" type="button">+</button>
+      </div>
     </div>
+
+    <!-- Food pill toggle -->
     <div class="f-group">
       <label class="f-label">Food Preference</label>
-      <div class="f-pill"><span class="f-pill-icon">🌿</span><select id="food"><option value="veg">Vegetarian</option><option value="nonveg">Non-Vegetarian</option><option value="both">Both</option></select><span class="f-pill-arrow">▼</span></div>
+      <div class="food-toggle">
+        <div class="food-pill active" id="fp-veg" onclick="setFood('veg')">
+          <span class="fp-emoji">🌿</span>
+          <span class="fp-label">Veg</span>
+        </div>
+        <div class="food-pill" id="fp-nonveg" onclick="setFood('nonveg')">
+          <span class="fp-emoji">🍗</span>
+          <span class="fp-label">Non-Veg</span>
+        </div>
+        <div class="food-pill" id="fp-both" onclick="setFood('both')">
+          <span class="fp-emoji">🍽️</span>
+          <span class="fp-label">Both</span>
+        </div>
+      </div>
     </div>
+
     <button class="submit-btn" onclick="submitRSVP()">✦ &nbsp; COUNT US IN — WE CAN'T WAIT! &nbsp; ✦</button>
   </div>
   <button class="nav-link" onclick="goTo('3b')" style="margin-top:12px;">← Back</button>
@@ -467,15 +528,30 @@ function getDevice() {
   if (/mobile|iphone|ipod|android|blackberry|opera mini|iemobile/i.test(ua)) return 'mobile';
   return 'desktop';
 }
-
 async function trackVisitor() {
-  try {
-    await _sb.from('visitors').upsert({ session_id: SESSION_ID, referrer: document.referrer || 'direct', device: getDevice(), last_seen_at: new Date().toISOString() }, { onConflict: 'session_id' });
-  } catch(e) {}
+  try { await _sb.from('visitors').upsert({ session_id: SESSION_ID, referrer: document.referrer || 'direct', device: getDevice(), last_seen_at: new Date().toISOString() }, { onConflict: 'session_id' }); } catch(e) {}
 }
-
 async function logEvent(event_name, screen) {
   try { await _sb.from('events').insert({ session_id: SESSION_ID, event_name, screen: screen || null }); } catch(e) {}
+}
+
+// Stepper state
+let adultsVal = 2, kidsVal = 0;
+function stepChange(field, delta) {
+  if (field === 'adults') {
+    adultsVal = Math.max(1, Math.min(20, adultsVal + delta));
+    document.getElementById('adults-display').innerHTML = adultsVal + '<br><span class="step-val-label">adult' + (adultsVal !== 1 ? 's' : '') + '</span>';
+  } else {
+    kidsVal = Math.max(0, Math.min(15, kidsVal + delta));
+    document.getElementById('kids-display').innerHTML = kidsVal + '<br><span class="step-val-label">' + (kidsVal === 0 ? 'none' : 'little one' + (kidsVal !== 1 ? 's' : '')) + '</span>';
+  }
+}
+
+// Food toggle
+let foodVal = 'veg';
+function setFood(val) {
+  foodVal = val;
+  ['veg','nonveg','both'].forEach(f => document.getElementById('fp-'+f).classList.toggle('active', f === val));
 }
 
 document.getElementById('splash-photo').style.backgroundImage = "url('./DIVI_baby.jpeg')";
@@ -540,7 +616,6 @@ function showForm() {
   logEvent('rsvp_yes_tap', 'screen4');
 }
 
-// Show name prompt overlay before declining
 function showDeclinePrompt() {
   logEvent('rsvp_no_tap', 'screen4');
   document.getElementById('decline-name').value = '';
@@ -574,15 +649,12 @@ function submitRSVP() {
     setTimeout(() => pill.classList.remove('error'), 2500);
     return;
   }
-  const adults = parseInt(document.getElementById('adults').value) || 2;
-  const kids   = parseInt(document.getElementById('kids').value)   || 0;
-  const food   = document.getElementById('food').value;
   document.getElementById('success-icon').textContent  = '🎀';
   document.getElementById('success-title').textContent = "Yay! We can't wait!";
   document.getElementById('success-msg').innerHTML =
     `We are so excited to celebrate with<br><strong style="font-style:normal;color:#7a3e52;">${name}</strong> 🤍<br><br>
     Divi is thrilled to welcome you on<br><strong style="font-style:normal;color:#7a3e52;">June 13th! ✨</strong>`;
-  _sb.from('rsvps').insert({ session_id: SESSION_ID, name, attending: true, adults, kids, food }).then(({error}) => { if(error) console.warn(error.message); });
+  _sb.from('rsvps').insert({ session_id: SESSION_ID, name, attending: true, adults: adultsVal, kids: kidsVal, food: foodVal }).then(({error}) => { if(error) console.warn(error.message); });
   logEvent('rsvp_submitted', 'screen4');
   goTo(5);
 }
@@ -591,9 +663,10 @@ function resetInvite() {
   document.getElementById('rsvp-choice').style.display = 'flex';
   document.getElementById('rsvp-form').style.display   = 'none';
   document.getElementById('guest-name').value = '';
-  document.getElementById('adults').value = '2';
-  document.getElementById('kids').value   = '0';
-  document.getElementById('food').value   = 'veg';
+  adultsVal = 2; kidsVal = 0; foodVal = 'veg';
+  document.getElementById('adults-display').innerHTML = '2<br><span class="step-val-label">adults</span>';
+  document.getElementById('kids-display').innerHTML   = '0<br><span class="step-val-label">none</span>';
+  setFood('veg');
   goTo(1);
 }
 
@@ -633,7 +706,6 @@ document.getElementById('screen5').addEventListener('dblclick', function(e) {
   openReveal();
 });
 
-// Close name prompt on backdrop tap
 document.getElementById('name-prompt-overlay').addEventListener('click', function(e) {
   if (e.target === this) confirmDecline(true);
 });
