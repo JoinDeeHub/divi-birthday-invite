@@ -141,8 +141,43 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .charity-desc {
   font-family: 'Cormorant Garamond', serif;
   font-size: 15px; color: #6a4040; line-height: 1.85;
-  margin-bottom: 16px; text-align: center;
+  margin-bottom: 14px; text-align: center;
 }
+
+/* ── SCHOOL HIGHLIGHT BOX ── */
+.charity-school {
+  background: linear-gradient(135deg, rgba(255,248,235,1) 0%, rgba(255,244,225,1) 100%);
+  border: 1.5px solid rgba(201,168,76,0.55);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 0 0 14px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(201,168,76,0.15);
+  position: relative;
+}
+.charity-school::before {
+  content: '🏫';
+  display: block;
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+.charity-school-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #7a3e52;
+  line-height: 1.35;
+  display: block;
+}
+.charity-school-loc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-style: italic;
+  color: #b8866e;
+  margin-top: 4px;
+  display: block;
+}
+
 .charity-detail-row {
   display: flex; align-items: flex-start; gap: 12px;
   margin-bottom: 12px;
@@ -330,15 +365,15 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 .reveal-credit {
   font-size: 9px;
   letter-spacing: 2px;
-  color: rgba(255, 220, 140, 0.92);   /* bright warm gold */
+  color: rgba(255, 220, 140, 0.92);
   font-family: 'Montserrat', sans-serif;
-  margin-top: 32px;                    /* comfortable breathing room after Close */
+  margin-top: 32px;
   animation: revealFadeUp 0.6s ease 0.95s both;
   text-shadow: 0 1px 6px rgba(0,0,0,0.3);
 }
 .reveal-credit span {
   font-style: italic;
-  color: #f5d87a;                      /* vivid gold for JoinDeeHub */
+  color: #f5d87a;
   font-weight: 500;
 }
 
@@ -454,20 +489,15 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 
   <div class="charity-card">
     <div class="charity-desc">
-      As Divi turns one, we believe<br>
-      the greatest gift is sharing joy.<br><br>
-      On her birthday, we are hosting a<br>
-      <strong style="color:#7a3e52;font-style:normal;">special lunch</strong> for the wonderful<br>
-      children at
+      We believe the greatest gift is sharing joy.<br>
+      So we are hosting a <strong style="color:#7a3e52;font-style:normal;">special lunch</strong><br>
+      for the wonderful children at
     </div>
 
-    <div class="charity-detail-row">
-      <div class="c-icon">🏫</div>
-      <div>
-        <span class="c-label">Hosted At</span>
-        <span class="c-value">Shree Ramana Maharishi<br>Academy for the Blind</span>
-        <span class="c-sub">J P Nagar, Bangalore</span>
-      </div>
+    <!-- HIGHLIGHTED SCHOOL -->
+    <div class="charity-school">
+      <span class="charity-school-name">Shree Ramana Maharishi<br>Academy for the Blind</span>
+      <span class="charity-school-loc">J P Nagar, Bangalore</span>
     </div>
 
     <div class="charity-detail-row">
@@ -483,7 +513,7 @@ body { font-family: 'Montserrat', sans-serif; background: #fdf6f0; overflow-x: h
 
     <div class="charity-quote">
       &ldquo;Happiness is most beautiful<br>when it is shared.&rdquo;<br><br>
-      🌸 &nbsp; Divi's first birthday begins<br>with a heart full of giving. &nbsp; 🌸
+      🌸 &nbsp; A heart full of giving — that's how<br>we welcome this beautiful milestone. &nbsp; 🌸
     </div>
 
     <div class="hearts-row">🤍 &nbsp; 💛 &nbsp; 🤍</div>
@@ -650,8 +680,7 @@ function declineRSVP() {
   document.getElementById('success-title').textContent = "We'll miss you!";
   document.getElementById('success-msg').innerHTML =
     `Your <span class="hi-pink">kindness</span> and <span class="hi-pink">love</span> mean the world to us.<br>
-    Divi is so lucky to have you in her life.<br><br>
-    🌸<br><br>
+    Divi is so lucky to have you in her life. 🌸<br><br>
     <em>Though you can't be here,<br>
     <span class="hi-pink">your love</span> will be with us as we celebrate.</em><br><br>
     <span style="color:#b8707e;font-style:normal;font-weight:500;">We'll miss you dearly! 💛</span>`;
